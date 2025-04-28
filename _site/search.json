@@ -25,7 +25,7 @@
     "href": "posts/post-with-code/index.html",
     "title": "Post With Code",
     "section": "",
-    "text": "This is a post with executable code."
+    "text": "This is a post."
   },
   {
     "objectID": "posts/08_03_probability_flow_dynamics.html",
@@ -53,6 +53,6 @@
     "href": "index.html",
     "title": "quatro",
     "section": "",
-    "text": "Post With Code\n\n\n\nnews\n\ncode\n\nanalysis\n\n\n\n\n\n\n\n\n\nApr 28, 2025\n\n\nHarlow Malloc\n\n\n\n\n\n\n\n\n\n\n\n\nWelcome To My Blog\n\n\n\nnews\n\n\n\n\n\n\n\n\n\nApr 25, 2025\n\n\nTristan O’Malley\n\n\n\n\n\n\n\n\n\n\n\n\nFrom PDEs to gradient flows for deterministic particle dynamics\n\n\n\njupyter\n\n\n\nIntroduction to deterministic particle methods for PDEs.\n\n\n\n\n\nNov 2, 2022\n\n\nDimitra Maoutsa\n\n\n\n\n\n\n\n\n\n\n\n\nProbability flow dynamics for constraining stochastic nonlinear systems\n\n\n\njupyter\n\n\n\nDetailed description of Deterministic Particle Flow control of (upcoming paper) on controling stochastic nonlinear systems by deterministacally perturbing their dynamics.\n\n\n\n\n\nAug 3, 2021\n\n\nDimitra Maoutsa\n\n\n\n\n\nNo matching items"
+    "text": "From PDEs to gradient flows for deterministic particle dynamics\n\n\n\njupyter\n\n\n\nIntroduction to deterministic particle methods for PDEs.\n\n\n\n\n\nNov 2, 2022\n\n\nDimitra Maoutsa\n\n\n\n\n\n\n\n\n\n\n\n\nWelcome To My Blog\n\n\n\nnews\n\n\n\n\n\n\n\n\n\nApr 25, 2022\n\n\nTristan O’Malley\n\n\n\n\n\n\n\n\n\n\n\n\nProbability flow dynamics for constraining stochastic nonlinear systems\n\n\n\njupyter\n\n\n\nDetailed description of Deterministic Particle Flow control of (upcoming paper) on controling stochastic nonlinear systems by deterministacally perturbing their dynamics.\n\n\n\n\n\nAug 3, 2021\n\n\nDimitra Maoutsa\n\n\n\n\n\n\n\n\n\n\n\n\nPost With Code\n\n\n\nnews\n\ncode\n\nanalysis\n\n\n\n\n\n\n\n\n\nApr 28, 2021\n\n\n\n\n\nNo matching items"
   }
 ]
