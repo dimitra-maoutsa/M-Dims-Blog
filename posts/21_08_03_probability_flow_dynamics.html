@@ -10,7 +10,7 @@
 <meta name="dcterms.date" content="2021-08-03">
 <meta name="description" content="Detailed description of Deterministic Particle Flow control of (upcoming paper) on controling stochastic nonlinear systems by deterministacally perturbing their dynamics.">
 
-<title>Probability flow dynamics for constraining stochastic nonlinear systems – quatro</title>
+<title>Probability flow dynamics for constraining stochastic nonlinear systems – M Dims blog</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -23,7 +23,27 @@ ul.task-list li input[type="checkbox"] {
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
 }
-</style>
+/* CSS for citations */
+div.csl-bib-body { }
+div.csl-entry {
+  clear: both;
+  margin-bottom: 0em;
+}
+.hanging-indent div.csl-entry {
+  margin-left:2em;
+  text-indent:-2em;
+}
+div.csl-left-margin {
+  min-width:2em;
+  float:left;
+}
+div.csl-right-inline {
+  margin-left:2em;
+  padding-left:1em;
+}
+div.csl-indent {
+  margin-left: 2em;
+}</style>
 
 
 <script src="../site_libs/quarto-nav/quarto-nav.js"></script>
@@ -112,7 +132,7 @@ window.Quarto = {
       <div class="navbar-container container-fluid">
       <div class="navbar-brand-container mx-auto">
     <a class="navbar-brand" href="../index.html">
-    <span class="navbar-title">quatro</span>
+    <span class="navbar-title">M Dims blog</span>
     </a>
   </div>
             <div id="quarto-search" class="" title="Search"></div>
@@ -153,6 +173,7 @@ window.Quarto = {
         </div>
       </div>
                           <div class="quarto-categories">
+                <div class="quarto-category">blog</div>
                 <div class="quarto-category">jupyter</div>
               </div>
                   </div>
@@ -200,43 +221,88 @@ window.Quarto = {
 
 <section id="dynamics-of-constrained-densities" class="level2">
 <h2 class="anchored" data-anchor-id="dynamics-of-constrained-densities"><strong>Dynamics of constrained densities</strong></h2>
-<p>Biological and physical systems are often subjected to intrinsic or extrinsic noise sources that influence their dynamics. Characteristic examples include molecular reactions and chemical kinetics <a href="#cite-gillespie2003improved">CITE</a>, populations of animal species, biological neurons <a href="#cite-saarinen2008stochastic">CITE</a>, and evolution <a href="#cite-lande2003stochastic">CITE</a>,<a href="#cite-takahata1975effect">CITE</a>. Stochastic differential equations (SDEs) effectively capture the phenomenology of the dynamics of such systems, at different precision scales by both considering deterministic and stochastic forces affecting their state variables <span class="math inline">\(X_t \in  \mathcal{R}^d\)</span> following</p>
+<p>Biological and physical systems are often subjected to intrinsic or extrinsic noise sources that influence their dynamics. Characteristic examples include molecular reactions and chemical kinetics <span class="citation" data-cites="gillespie2003improved">(<a href="#ref-gillespie2003improved" role="doc-biblioref">Gillespie and Petzold 2003</a>)</span>, populations of animal species, biological neurons <span class="citation" data-cites="saarinen2008stochastic">(<a href="#ref-saarinen2008stochastic" role="doc-biblioref">Saarinen, Linne, and Yli-Harja 2008</a>)</span>, and evolution <span class="citation" data-cites="lande2003stochastic">(<a href="#ref-lande2003stochastic" role="doc-biblioref">Lande, Engen, and Saether 2003</a>)</span>,<span class="citation" data-cites="takahata1975effect">(<a href="#ref-takahata1975effect" role="doc-biblioref">Takahata, Ishii, and Matsuda 1975</a>)</span>. Stochastic differential equations (SDEs) effectively capture the phenomenology of the dynamics of such systems, at different precision scales by both considering deterministic and stochastic forces affecting their state variables <span class="math inline">\(X_t \in  \mathcal{R}^d\)</span> following</p>
 <p><span class="math display">\[dX_t = f(X_t,t) dt  + \sigma dW_t. \]</span></p>
 <p>In Eq.<span class="math inline">\((1)\)</span> the drift <span class="math inline">\(f(\cdot,\cdot): \mathcal{R}^d \times \mathcal{R} \rightarrow \mathcal{R}^d\)</span> is a smooth typically nonlinear function that captures the deterministic part of the driving forces, while <span class="math inline">\(W\)</span> stands for a k–dimensional (<span class="math inline">\(k\leq d\)</span>) vector of independent Wiener processes acting as white noise sources, representing contributions from unaccounted degrees of freedom, thermal fluctuations, or external perturbations. We denote the noise strength by <span class="math inline">\(\sigma \in \mathcal{R}\)</span><a href="#fn1" class="footnote-ref" id="fnref1" role="doc-noteref"><sup>1</sup></a>, and define the noise covariance as <span class="math inline">\({D =\sigma ^2}\)</span>. In the following we refer to this system as the system.</p>
 <p>Under multiple independent realisations, the stochastic nature of Eq.<span class="math inline">\((1)\)</span> gives rise to an ensemble of trajectories starting from an initial state <span class="math inline">\(X_0=x_0\)</span>. This ensemble captures the likely evolution of the considered system at later time points. We may characterise the unfolding of this trajectory ensemble in terms of a probability density <span class="math inline">\(p_t(x)\)</span>, whose evolution is governed by the Fokker–Planck equation</p>
 <p><span class="math display">\[\frac{\partial p_t(x)}{\partial t}
 = \nabla\cdot \left[- f(x,t) p_t (x) + \frac{\sigma^2}{2} \nabla p_t(x)\right]\]</span> <span class="math display">\[ \hspace{-57pt}= {\cal{L}}_f^\dagger p_t(x) ,\]</span></p>
 <p>with initial condition <span class="math inline">\(p_0(x) = \delta(x-x_0)\)</span>, and <span class="math inline">\(\mathcal{L}_f^\dagger\)</span> denoting the Fokker–Planck operator. Due to the stochastic nature of the system of Eq.<span class="math inline">\((1)\)</span>, exact pinpointing of its state at some later time point <span class="math inline">\(T\)</span> is in general not possible.</p>
-<p>Yet, often, we desire to drive biophysical and biochemical stochastic processes to predefined target states within a specified time interval. Characteristic examples include designing artificial selection strategies for population dynamics <a href="#cite-nourmohammad2021optimal">cite</a>, or triggering phenotype switches during cell fate determination <a href="#cite-wells2015control">cite</a>. Similar needs for manipulation are also relevant for non-biological, but rather technical systems, e.g.&nbsp;for control of robotic or artificial limbs <a href="#cite-todorov2005stochastic">cite</a>, <a href="#cite-todorov2004optimality">cite</a>. In all these settings, external system interventions become essential.</p>
+<p>Yet, often, we desire to drive biophysical and biochemical stochastic processes to predefined target states within a specified time interval. Characteristic examples include designing artificial selection strategies for population dynamics <span class="citation" data-cites="nourmohammad2021optimal">(<a href="#ref-nourmohammad2021optimal" role="doc-biblioref">Nourmohammad and Eksin 2021</a>)</span>, or triggering phenotype switches during cell fate determination <span class="citation" data-cites="wells2015control">(<a href="#ref-wells2015control" role="doc-biblioref">Wells, Kath, and Motter 2015</a>)</span>. Similar needs for manipulation are also relevant for non-biological, but rather technical systems, e.g.&nbsp;for control of robotic or artificial limbs <span class="citation" data-cites="todorov2005stochastic">(<a href="#ref-todorov2005stochastic" role="doc-biblioref">Todorov 2005</a>)</span>, <span class="citation" data-cites="todorov2004optimality">(<a href="#ref-todorov2004optimality" role="doc-biblioref">Todorov 2004</a>)</span>. In all these settings, external system interventions become essential.</p>
 <p>Here, we are interested in introducing constraints <span class="math inline">\(\mathcal{C}\)</span> to the dynamics of the system of Eq.(<span class="math inline">\(1\)</span>) acting within a predefined time interval <span class="math inline">\({0 \leq t \leq T}\)</span>. The set of possible constraints <span class="math inline">\(\mathcal{C}\)</span> comprises terminal <span class="math inline">\(\chi(X_T)\)</span>, and/or path constraints $U(x,t), tT $, depending on whether the desired limiting conditions apply for the entire interval or only to the terminal time point. The path constraints $U(x,t): ^{d} $ penalise specific trajectories (<em>paths</em>) to render specific regions of the state space more (un)likely to be visited, while the function <span class="math inline">\(\chi(x): \mathcal{R}^{d} \rightarrow \mathcal{R}\)</span> influences the terminal system state <span class="math inline">\(X_T\)</span>.</p>
 <p>To incorporate the constraints <span class="math inline">\(\mathcal{C}\)</span> into the system, we define a modified dynamics, the <em>controlled</em> dynamics, through a change of probability measure of the path ensemble <span class="math inline">\(\mathbb{P}_f\)</span> induced by the uncontrolled system. More precisely, we consider the path measure <span class="math inline">\(\mathbb{Q}\)</span> (Appendix A), induced by the controlled system, as equivalent to a <em>reweighting</em> of paths <span class="math inline">\(X_{0:T}\)</span> generated from the uncontrolled dynamics (Eq.<span class="math inline">\((1)\)</span>) over the time interval <span class="math inline">\([0,\; T]\)</span>. Individual path weights are thus given by the likelihood ratio (<em>Radon–Nikodym derivative</em>)</p>
 <p><span class="math display">\[\frac{d\mathbb{Q}}{d\mathbb{P}_f} (X_{0:T}) = \frac{\chi(X_T)}{Z} \exp\left[- \int_0^T U(X_t,t) dt \right],\]</span></p>
 <p>where <span class="math inline">\(Z\)</span> denotes the normalising constant</p>
 <p><span class="math display">\[Z = \Bigg \langle \chi(X_T) \exp\left(- \int_0^T U(X_t,t) dt \right) \Bigg\rangle_{\mathbb{P}_f},\]</span></p>
 <p>and <span class="math inline">\(\langle \cdot \rangle_{\mathbb{P}_f}\)</span> denotes the expectation over paths of the uncontrolled system.</p>
-<p>According to the Girsanov’s theorem, the controlled process defined by the weights of Eq.<span class="math inline">\((4)\)</span> is also a diffusion process with the same diffusion constant <span class="math inline">\(\sigma\)</span>, but with a modified, time-dependent drift function <span class="math inline">\(g(x,t): \mathcal{R}^d \times \mathcal{R} \rightarrow \mathcal{R}^d\)</span> <a href="#cite-girsanov1960transforming">cite</a>, <a href="#cite-oksendal2003stochastic">cite</a>. Thus, we express the controlled dynamics as a time- and state- dependent perturbation <span class="math inline">\(u(x,t): \mathcal{R}^d \times \mathcal{R} \rightarrow \mathcal{R}^d\)</span> of the deterministic forces <span class="math inline">\(f(x,t)\)</span> acting on the system</p>
+<p>According to the Girsanov’s theorem, the controlled process defined by the weights of Eq.<span class="math inline">\((4)\)</span> is also a diffusion process with the same diffusion constant <span class="math inline">\(\sigma\)</span>, but with a modified, time-dependent drift function <span class="math inline">\(g(x,t): \mathcal{R}^d \times \mathcal{R} \rightarrow \mathcal{R}^d\)</span> <span class="citation" data-cites="girsanov1960transforming">(<a href="#ref-girsanov1960transforming" role="doc-biblioref">Girsanov 1960</a>)</span>, <span class="citation" data-cites="oksendal2003stochastic">(<a href="#ref-oksendal2003stochastic" role="doc-biblioref">Øksendal 2003</a>)</span>. Thus, we express the controlled dynamics as a time- and state- dependent perturbation <span class="math inline">\(u(x,t): \mathcal{R}^d \times \mathcal{R} \rightarrow \mathcal{R}^d\)</span> of the deterministic forces <span class="math inline">\(f(x,t)\)</span> acting on the system</p>
 <p><span class="math display">\[ dX_t = \Big( f(X_t,t)   + u(X_t,t) \Big) \; dt + \sigma dW_t \]</span> <span class="math display">\[= \hspace{25pt}g(X_t,t)\;\hspace{5pt} dt \hspace{30pt}+ \sigma dW_t.\]</span></p>
 <p>Our goal is to identify the <em>optimal</em> time- and state-dependent interventions <span class="math inline">\(u(x,t)\)</span> that minimise <em>intervention costs</em> and <em>path constraints</em> captured by the cost function</p>
 <p><span class="math display">\[S(x,u,t) =  \frac{1}{2} u(x,t)^T H u(x,t)+ U(x,t),\]</span></p>
 <p>while also drive the system towards a predefined target state <span class="math inline">\(x^*\)</span> by time <span class="math inline">\(T\)</span>, if a terminal constraint is pertinent. The first part of the cost function penalises large intervention values <span class="math inline">\(u(x,t)\)</span>, with <span class="math inline">\(H \in \mathcal{R}^{d \times d}\)</span> determining the cost of intervention along each system dimension, whereas the path cost <span class="math inline">\(U(x,t)\)</span> constrains the transient behaviour of the system.</p>
-<p>Solutions of this type of <em>stochastic control problems</em> rest on the Bellman’s principle of optimality, according to which an optimal solution over an interval <span class="math inline">\([0,\;T]\)</span> consists of optimal sub-solutions over the respective sub-intervals <span class="math inline">\([t',\;T]\)</span> with later starting times <span class="math inline">\(t'\)</span>, and appropriate initial conditions <a href="bellman1956dynamic">cite</a>. This sequence of sub-problems with interdependent initial conditions requires the cost function <span class="math inline">\(S(x,u,t)\)</span> to be minimized over the entire time interval <span class="math inline">\([0,\;T]\)</span>. Therefore, here, we minimize the <em>total expected cost</em> in that interval defined as the sum of the terminal cost <span class="math inline">\(\chi(X_T)\)</span> and the time integrated path and intervention costs</p>
+<p>Solutions of this type of <em>stochastic control problems</em> rest on the Bellman’s principle of optimality, according to which an optimal solution over an interval <span class="math inline">\([0,\;T]\)</span> consists of optimal sub-solutions over the respective sub-intervals <span class="math inline">\([t',\;T]\)</span> with later starting times <span class="math inline">\(t'\)</span>, and appropriate initial conditions <span class="citation" data-cites="bellman1956dynamic">(<a href="#ref-bellman1956dynamic" role="doc-biblioref">Bellman 1956</a>)</span>. This sequence of sub-problems with interdependent initial conditions requires the cost function <span class="math inline">\(S(x,u,t)\)</span> to be minimized over the entire time interval <span class="math inline">\([0,\;T]\)</span>. Therefore, here, we minimize the <em>total expected cost</em> in that interval defined as the sum of the terminal cost <span class="math inline">\(\chi(X_T)\)</span> and the time integrated path and intervention costs</p>
 <p><span class="math display">\[ J(x,t=0) = \min_{u} \Big\langle  \int_{t=0}^T S(x,u,t') \,  dt' -  \ln \chi(X_T) \Big\rangle_{\mathbb{Q}}. \]</span> In Eq.<span class="math inline">\((6)\)</span>, the brackets <span class="math inline">\(\langle \cdot \rangle_{\mathbb{Q}}\)</span> denote the expectation over the entire path probability measure <span class="math inline">\(\mathbb{Q}\)</span>.</p>
-<p>To establish the optimality of the interventions, we demand the cost functional <span class="math inline">\(J(x,t)\)</span> to follow the Hamilton–Jacobi–Bellman (<em>HJB</em>) equation (Appendix),</p>
+<p>To establish the optimality of the interventions, we demand the cost functional <span class="math inline">\(J(x,t)\)</span> to follow the Hamilton–Jacobi–Bellman (<em>HJB</em>) equation,</p>
 <p><span class="math display">\[  -\frac{\partial}{\partial t} J(X_t,t) = \min_u \Bigg[ \frac{1}{2} u^T(X_t) H u(X_t) + U(X_t,t)\]</span> <span class="math display">\[\hspace{95pt} + g(X_t,t) \nabla_x J(X_t,t) + \frac{1}{2} \text{Tr}[D \frac{\partial^2}{\partial x^2} J(X_t,t)]  \Bigg] \]</span> a <em>nonlinear</em> partial differential equation (<em>PDE</em>) with a terminal condition <span class="math inline">\(J(x,T)= \ln \chi(X_T)\)</span>, which is, therefore, solved backwards in time. The gradient of the solution of this equation</p>
 <p><span class="math display">\[u^*(x,t) = - H^{-1}  \nabla J(x,t),\]</span></p>
 <p>provides the optimal state- and time-dependent interventions for the considered system with constraints <span class="math inline">\(\mathcal{C}\)</span>. Yet, without investigating the structure of the solution, direct solving a second-order nonlinear PDE requires computationally demanding calculations, that grow exponentially with increasing system dimension.</p>
-<p>To simplify matters, we linearise the Hamilton–Jacobi–Bellman equation by employing a logarithmic variable transformation, <span class="math inline">\(J(x,t) = - \log( \phi(x,t))\)</span>, proposed initially by Nelson in <a href="#cite-nelson2020dynamical">cite</a>, and introduced in the context of stochastic control by Fleming in <a href="fleming1977exit">cite</a> (<em>Hopf-Cole transform</em>). This requires the minimal assumption of the control costs <span class="math inline">\(H\)</span> and noise covariance <span class="math inline">\(D\)</span> being inversely proportional along each state dimension, <span class="math inline">\(H \propto D^{-1}=\sigma^{-2}\)</span>, known in the literature as the <em>path integral control condition</em> <a href="#cite-kappen2005linear">cite</a>.</p>
+<p>To simplify matters, we linearise the Hamilton–Jacobi–Bellman equation by employing a logarithmic variable transformation, <span class="math inline">\(J(x,t) = - \log( \phi(x,t))\)</span>, proposed initially by Nelson in <span class="citation" data-cites="nelson2020dynamical">(<a href="#ref-nelson2020dynamical" role="doc-biblioref">Nelson 1967</a>)</span>, and introduced in the context of stochastic control by Fleming in <span class="citation" data-cites="fleming1977exit">(<a href="#ref-fleming1977exit" role="doc-biblioref">Fleming 1977</a>)</span> (<em>Hopf-Cole transform</em>). This requires the minimal assumption of the control costs <span class="math inline">\(H\)</span> and noise covariance <span class="math inline">\(D\)</span> being inversely proportional along each state dimension, <span class="math inline">\(H \propto D^{-1}=\sigma^{-2}\)</span>, known in the literature as the <em>path integral control condition</em> <span class="citation" data-cites="kappen2005linear">(<a href="#ref-kappen2005linear" role="doc-biblioref">Kappen 2005</a>)</span>.</p>
 <p>The logarithmic variable transformation allows us to express the resulting controlled drift</p>
 <p><span class="math display">\[g(x,t)  = f(x,t) +  \sigma^2 \nabla \ln \phi(x,t), \]</span></p>
 <p>in terms of the solution $_t(x) (x,t) $ of a <em>linear</em> backward partial differential equation</p>
 <p><span class="math display">\[\frac{\partial \phi_t(x)}{\partial t} + {\cal{L}}_f \phi_t(x) - U(x,t) \phi_t(x) = 0 ,\]</span></p>
-<p>with terminal condition $_T(x) = (X_T) $, and with <span class="math inline">\(\mathcal{L}_f\)</span> denoting the adjoint Fokker–Planck operator (Appendix).</p>
+<p>with terminal condition $_T(x) = (X_T) $, and with <span class="math inline">\(\mathcal{L}_f\)</span> denoting the adjoint Fokker–Planck operator.</p>
+<p><img src="images/OU_1d_bridges.png" class="img-fluid"></p>
+
 
 
 </section>
 
 
-<div id="quarto-appendix" class="default"><section id="footnotes" class="footnotes footnotes-end-of-document" role="doc-endnotes"><h2 class="anchored quarto-appendix-heading">Footnotes</h2>
+<div id="quarto-appendix" class="default"><section class="quarto-appendix-contents" role="doc-bibliography" id="quarto-bibliography"><h2 class="anchored quarto-appendix-heading">References</h2><div id="refs" class="references csl-bib-body hanging-indent" data-entry-spacing="0" role="list">
+<div id="ref-bellman1956dynamic" class="csl-entry" role="listitem">
+Bellman, Richard. 1956. <span>“<a href="https://www.pnas.org/content/42/10/767">Dynamic Programming and Lagrange Multipliers</a>.”</span> <em>Proceedings of the National Academy of Sciences of the United States of America</em> 42 (10): 767.
+</div>
+<div id="ref-fleming1977exit" class="csl-entry" role="listitem">
+Fleming, Wendell H. 1977. <span>“<a href="https://link.springer.com/article/10.1007/BF01442148">Exit Probabilities and Optimal Stochastic Control</a>.”</span> <em>Applied Mathematics and Optimization</em> 4 (1): 329–46.
+</div>
+<div id="ref-gillespie2003improved" class="csl-entry" role="listitem">
+Gillespie, Daniel T, and Linda R Petzold. 2003. <span>“<a href="https://doi.org/10.1063/1.1613254">Improved Leap-Size Selection for Accelerated Stochastic Simulation</a>.”</span> <em>The Journal of Chemical Physics</em> 119 (16): 8229–34.
+</div>
+<div id="ref-girsanov1960transforming" class="csl-entry" role="listitem">
+Girsanov, Igor Vladimirovich. 1960. <span>“<a href="http://www.mathnet.ru/php/archive.phtml?wshow=paper&amp;jrnid=tvp&amp;paperid=4837&amp;option_lang=eng">On Transforming a Certain Class of Stochastic Processes by Absolutely Continuous Substitution of Measures</a>.”</span> <em>Theory of Probability and Its Applications</em> 5 (3): 285–301.
+</div>
+<div id="ref-kappen2005linear" class="csl-entry" role="listitem">
+Kappen, Hilbert J. 2005. <span>“<a href="https://arxiv.org/abs/physics/0411119">Linear Theory for Control of Nonlinear Stochastic Systems</a>.”</span> <em>Physical Review Letters</em> 95 (20): 200201.
+</div>
+<div id="ref-lande2003stochastic" class="csl-entry" role="listitem">
+Lande, Russell, Steinar Engen, and Bernt-Erik Saether. 2003. <em>Stochastic Population Dynamics in Ecology and Conservation</em>. Oxford University Press.
+</div>
+<div id="ref-nelson2020dynamical" class="csl-entry" role="listitem">
+Nelson, Edward. 1967. <em>Dynamical Theories of Brownian Motion</em>. Vol. 106. Princeton university press.
+</div>
+<div id="ref-nourmohammad2021optimal" class="csl-entry" role="listitem">
+Nourmohammad, Armita, and Ceyhun Eksin. 2021. <span>“<a href="https://journals.aps.org/prx/abstract/10.1103/PhysRevX.11.011044">Optimal Evolutionary Control for Artificial Selection on Molecular Phenotypes</a>.”</span> <em>Physical Review X</em> 11 (1): 011044.
+</div>
+<div id="ref-oksendal2003stochastic" class="csl-entry" role="listitem">
+Øksendal, Bernt. 2003. <em>Stochastic Differential Equations</em>. Springer.
+</div>
+<div id="ref-saarinen2008stochastic" class="csl-entry" role="listitem">
+Saarinen, Antti, Marja-Leena Linne, and Olli Yli-Harja. 2008. <span>“<a href="https://doi.org/10.1371/journal.pcbi.1000004">Stochastic Differential Equation Model for Cerebellar Granule Cell Excitability</a>.”</span> <em>PLoS Computational Biology</em> 4 (2): e1000004.
+</div>
+<div id="ref-takahata1975effect" class="csl-entry" role="listitem">
+Takahata, Naoyuki, Kazushige Ishii, and Hirotsugu Matsuda. 1975. <span>“<a href="https://doi.org/10.1073/pnas.72.11.4541">Effect of Temporal Fluctuation of Selection Coefficient on Gene Frequency in a Population</a>.”</span> <em>Proceedings of the National Academy of Sciences</em> 72 (11): 4541–45.
+</div>
+<div id="ref-todorov2004optimality" class="csl-entry" role="listitem">
+Todorov, Emanuel. 2004. <span>“<a href="https://www.nature.com/articles/nn1309">Optimality Principles in Sensorimotor Control</a>.”</span> <em>Nature Neuroscience</em> 7 (9): 907–15.
+</div>
+<div id="ref-todorov2005stochastic" class="csl-entry" role="listitem">
+———. 2005. <span>“<a href="https://doi.org/10.1162/0899766053491887">Stochastic Optimal Control and Estimation Methods Adapted to the Noise Characteristics of the Sensorimotor System</a>.”</span> <em>Neural Computation</em> 17 (5): 1084–1108.
+</div>
+<div id="ref-wells2015control" class="csl-entry" role="listitem">
+Wells, Daniel K, William L Kath, and Adilson E Motter. 2015. <span>“<a href="https://doi.org/10.1103/PhysRevX.5.031036">Control of Stochastic and Induced Switching in Biophysical Networks</a>.”</span> <em>Physical Review X</em> 5 (3): 031036.
+</div>
+</div></section><section id="footnotes" class="footnotes footnotes-end-of-document" role="doc-endnotes"><h2 class="anchored quarto-appendix-heading">Footnotes</h2>
 
 <ol>
 <li id="fn1"><p>For the sake of brevity, we consider here a state independent diffusion, but the formalism easily generalises for a state dependent diffusion <span class="math inline">\(\sigma(x)\)</span>, as outlined in the Appendix.}<a href="#fnref1" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
