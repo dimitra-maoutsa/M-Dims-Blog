@@ -1,0 +1,53 @@
+{\rtf1\ansi\ansicpg1252\cocoartf2818
+\cocoatextscaling0\cocoaplatform0{\fonttbl\f0\fswiss\fcharset0 Helvetica;}
+{\colortbl;\red255\green255\blue255;}
+{\*\expandedcolortbl;;}
+\paperw11900\paperh16840\margl1440\margr1440\vieww11520\viewh8400\viewkind0
+\pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\pardirnatural\partightenfactor0
+
+\f0\fs24 \cf0 ---\
+title: "Wasserstein gradient flows"\
+author: \'93Dimitra Maoutsa\'94\
+date: "2022-04-04\'94\
+categories: [blog]\
+---\
+\
+\
+\\subsection\{What is a gradient flow in the probability space?\}\
+\
+![](thumbnail.jpg)\
+\
+Given some energy function $\\mathcal\{E\}(\\rho)$ in some probability space $\\mathcal\{P\}(\\Omega)$ with some metric $\\mathcal\{G\}(\\rho))$, $(\\mathcal\{P\}(\\Omega), \\mathcal\{G\}(\\rho))$\
+the gradient flow can be defined as the inverse metric times the differential\
+\\begin\{equation\}\
+    \\partial_t \\rho_t = -\\mathcal\{G\}(\\rho_t)^\{-1\} \\frac\{\\delta \\mathcal\{E\}(\\rho_t)\}\{\\delta \\rho_t\}.\
+\\end\{equation\}\
+\
+Intuitively this means that the considered system of equations follows the trajectory of steepest descend on the energy functional $\\mathcal\{E\}(\\rho)$. To define the steepest descend we need to define the notion of the gradient. This depends on the selected geometry of the space and is computed according to the selected metric.\
+\
+If we consider as energy function the Kullback Leibler divergence and for information metric we consider the Wasserstein metric, the Wasserstein gradient flow forms the Fokker-Planck equation.\
+In this case the metric inverse here is $\\nabla \\cdot \\rho_t \\nabla$\
+\
+\\begin\{align\}\
+\\partial_t \\rho_t &= - \\text\{grad\}^\{\\mathcal\{W\}\} D_\{KL\}(\\rho_t ||\\rho_\{ss\})\\\\\
+&= \\nabla \\cdot \\left(  \\rho_t \\nabla \\left( f + \\log \\rho_t +1 \\right)  \\right)\\\\\
+&= \\nabla \\cdot \\left( \\rho_t \\nabla f\\right) + \\nabla \\cdot \\nabla \\rho\\\\\
+&= \\nabla \\cdot \\left( \\rho_t \\nabla f\\right) + \\Delta \\rho_t\
+\\end\{align\}\
+\
+Here we have considered that the stationary density is given by $\\rho_\{ss\} \\propto e^\{-f\}$, and that the differential of $\\frac\{\\delta \\mathcal\{E\}(\\rho_t)\}\{\\delta \\rho_t\} = \\log \\rho + f$.\
+\
+By considering the Benamou-Brenier formulation~\\cite\{benamou1999numerical,ambrosio2003lecture\} of the Fokker-Planck dynamics we can obtain a better understanding how the selected geometry (and metric) of the probability space influences the gradient flow dynamics. According to the Benamou-Brenier formalism the gradient flow dynamics for the Fokker-Planck equation has the following \\textbf\{optimal transport\} interpretation:\
+ It describes a search over all possible vector fields $v_t$ that will transport probability mass from $\\mu_0$ to $\\mu_1$, with the Wasserstein distance capturing the minimum possible cost of this transfer. Given two probability distributions $\\mu_0$ and $\\mu_1$ we define this distance to be the minimum of the integral of the norm of the vector field $v_t$\
+\\begin\{equation\}\
+d^2_\{OT\} (\\mu_0, \\mu_1) = \\inf \\limits_\{\\mu_t, v_t\} \\int_0^1 \\| v_t \\|^2_\{L^2(\\mu_t)\} dt = \\mathcal\{W\}^2_2 (\\mu_0,\\mu_1),\
+\\end\{equation\}\
+under the constraint that the transient probability distribution $\\mu_t$ fulfils the continuity equation\
+\\begin\{equation\}\
+    \\partial_t \\mu_t + \\nabla \\cdot (\\mu_t v_t) = 0,\
+\\end\{equation\}\
+with $\\mu_0 = \\mu^0$ and $\\mu_1 = \\mu^1$.\
+This constraint captures how the probability $\\mu_t$ evolves while being pushed along the time dependent vector field $v_t$. The Wasserstein distance is the minimal energy cost of performing this transformation from $\\mu_0$ to $\\mu_1$.\
+%connection to the transport map, v_t is the gradient of the local transport map.\
+This defines a metric on probability measures, and consequently it induces a geometry on the space of probabilities.\
+}
