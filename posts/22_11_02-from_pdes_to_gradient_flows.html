@@ -8,7 +8,7 @@
 
 <meta name="author" content="Dimitra Maoutsa">
 <meta name="dcterms.date" content="2022-11-02">
-<meta name="description" content="Introduction to deterministic particle methods for PDEs. (adapted text from my PhD thesis)">
+<meta name="description" content="Introduction to deterministic particle methods for PDEs. (adapted text from notes of my PhD thesis - will be updated)">
 
 <title>From PDEs to gradient flows for deterministic particle dynamics – M Dims blog</title>
 <style>
@@ -149,7 +149,7 @@ window.Quarto = {
       <h1 class="title">From PDEs to gradient flows for deterministic particle dynamics</h1>
                   <div>
         <div class="description">
-          Introduction to deterministic particle methods for PDEs. (adapted text from my PhD thesis)
+          Introduction to deterministic particle methods for PDEs. (adapted text from notes of my PhD thesis - will be updated)
         </div>
       </div>
                           <div class="quarto-categories">
@@ -183,8 +183,14 @@ window.Quarto = {
   </header><div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
 <!-- sidebar -->
 <!-- margin-sidebar -->
-    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar zindex-bottom">
-        
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">On this page</h2>
+   
+  <ul>
+  <li><a href="#fokker-planck-equations-as-gradient-flows" id="toc-fokker-planck-equations-as-gradient-flows" class="nav-link active" data-scroll-target="#fokker-planck-equations-as-gradient-flows">Fokker Planck equations as gradient flows</a></li>
+  </ul>
+</nav>
     </div>
 <!-- main -->
 <main class="content quarto-banner-title-block" id="quarto-document-content">
@@ -193,35 +199,40 @@ window.Quarto = {
 
 
 
-<p>We consider PDEs that describe the evolution of a density <span class="math inline">\(\rho_t(x)\)</span> that evolves in time, with <span class="math inline">\(x\in \mathcal{R}^D\)</span>. We describe the temporal evolution of the density <span class="math inline">\(\rho_t(x)\)</span>, e.g., a density of particles at location <span class="math inline">\(x\)</span>. One fundamental equation is the continuity equation, which prescribes how the the density <span class="math inline">\(\rho_t(x)\)</span> evolves in time according to laws of mass conservation. In particular, the continuity equation declares that the time derivative of the density <span class="math inline">\(\rho_t(x)\)</span> plus some velocity field <span class="math inline">\(v\)</span> <span class="math display">\[\begin{equation}
+<p>Let us consider PDEs that describe the evolution of a density <span class="math inline">\(\rho_t(x)\)</span> that evolves in time, with <span class="math inline">\(x\in \mathcal{R}^D\)</span>. We want to describe the temporal evolution of the density <span class="math inline">\(\rho_t(x)\)</span>, e.g., a density of particles at location <span class="math inline">\(x\)</span>.</p>
+<p>One fundamental equation for this is the continuity equation, which prescribes how the the density <span class="math inline">\(\rho_t(x)\)</span> evolves in time according to laws of mass conservation. In particular, the continuity equation expresses the conservation of mass by expressing that the time derivative of the density <span class="math inline">\(\rho_t(x)\)</span> plus the divergence of the product of a velocity field <span class="math inline">\(v(x,t)\)</span> and the density must vanish <span class="math display">\[\begin{equation}
     \partial_t \rho_t(x) + \nabla \cdot \left(  v(x,t) \rho_t(x) \right) = 0,
-\end{equation}\]</span> given some initial condition <span class="math inline">\(\rho_0(x) = \rho^0(x)\)</span>. The velocity field in this equation prescribes spatial transformation of the density as time evolves, i.e., how a density of particles starting from <span class="math inline">\(\rho^0(x)\)</span> moves according to the velocity field <span class="math inline">\(v(x,t)\)</span>.</p>
-<p>The continuity equation admits a useful discretisation in terms of particles. We can consider an associated ordinary differential equation. We can consider the evolution of <span class="math inline">\(N\)</span> particles in the Euclidean space, evolving according to the ODE <span class="math display">\[\begin{equation}
+\end{equation}\]</span> given some initial condition <span class="math inline">\(\rho_0(x) = \rho^0(x)\)</span>. The velocity field in this equation prescribes a spatial transformation of the density as time evolves, i.e., how a density of particles starting from <span class="math inline">\(\rho^0(x)\)</span> moves according to the velocity field <span class="math inline">\(v(x,t)\)</span>.</p>
+<p>The continuity equation admits a useful discretisation in terms of particles. We can define an associated ordinary differential equation for their evolving positions. In fact, we can consider the evolution of <span class="math inline">\(N\)</span> particles in the Euclidean space, evolving according to the ODE <span class="math display">\[\begin{equation}
     \frac{dX_i(t)}{dt} = v(X_i(t),t) ,
-\end{equation}\]</span> given some initial conditions <span class="math inline">\(X_i(0)\)</span>. There is a close correspondence between this system of ODEs (the particles) and the solutions of the PDE. In particular, if the velocity field is sufficiently nice (globally Lipschitz in space) , then as long as the iniital conditions of the particles are drawn from the density representing the initial condition of the PDE, i.e.&nbsp;if I take the empirical measure at each of these locations, i.e., <span class="math display">\[\begin{equation}
+\end{equation}\]</span> given some initial conditions <span class="math inline">\(X_i(0)\)</span>.</p>
+<p>There is a close correspondence between this system of ODEs (the particles) and the solutions of the PDE. In particular, if the velocity field is sufficiently nice (globally Lipschitz in space), then as long as the iniital conditions of the particles are drawn from the density representing the initial condition of the PDE, i.e.&nbsp;if we take the empirical measure at each of the particle locations, i.e., <span class="math display">\[\begin{equation}
     \hat{\rho}_0 = \frac{1}{N} \sum^N_{i=1} \delta(x-X_i(0)) \xrightarrow{N \rightarrow \infty} \rho_0(x),
-\end{equation}\]</span> then the evolving locations of these Dirac masses converges according to the Wasserstein metric to the continuum solution of the PDE, <span class="math display">\[\begin{equation}
-    \hat{\rho}_t = \frac{1}{N} \sum^N_{i=1} \delta(x-X_i(t)) \xrightarrow{N \rightarrow \infty} \rho_t(x),
+\end{equation}\]</span> then the evolving locations of the Dirac masses (particles) converges according to the Wasserstein metric to the continuum solution of the PDE, <span class="math display">\[\begin{equation}
+    \hat{\rho}_t = \frac{1}{N} \sum^N_{i=1} \delta(x-X_i(t)) \xrightarrow{N \rightarrow \infty} \rho_t(x).
 \end{equation}\]</span></p>
-<p>Because of this close connection between the PDEs and the particle representation a lot of PDEs have a natural discretisation in terms of particles. The PDE conserves mass, i.e.&nbsp;whatever the integral of the initial data is that integral will be preserved over time. Also particle representation preserves positivity.</p>
+<p>Because of this close connection between the PDEs and the particle representation, a lot of PDEs have a natural discretisation in terms of particles. The PDE conserves mass, i.e.&nbsp;whatever the integral of the initial condition is, that integral will be preserved over time. And the particle representation preserves positivity.</p>
 <p>In general this equation is a Wasserstein gradient flow for an arbitrary velocity field.</p>
 <p>The difference between the transient empirical solution <span class="math inline">\(\hat{\rho}_t\)</span> and the exact solution <span class="math inline">\(\rho_t\)</span> within the time interval <span class="math inline">\(t \in[0,T]\)</span> will be bounded by a constant weighted by the initial distance of the initial condition</p>
 <p><span class="math display">\[\begin{equation}
-    \mathcal{W}_2(\hat{\rho}_t,\rho_t) \leq C_{T,\|  \nabla v\|_{\infty}} \mathcal{W}_2(\hat{\rho}_0, \rho_0)
+    \mathcal{W}_2(\hat{\rho}_t,\rho_t) \leq C_{T,\|  \nabla v\|_{\infty}} \mathcal{W}_2(\hat{\rho}_0, \rho_0).
 \end{equation}\]</span></p>
-<p>##Fokker Planck equations as gradient flows An equation that is a Wasserstein gradient flow and has attracted a lot of interest in the last years is the Fokker-Planck equation. It describes the evolution of a density according to adrift term <span class="math display">\[\begin{equation}
+<section id="fokker-planck-equations-as-gradient-flows" class="level2">
+<h2 class="anchored" data-anchor-id="fokker-planck-equations-as-gradient-flows">Fokker Planck equations as gradient flows</h2>
+<p>An equation that is a Wasserstein gradient flow and has attracted a lot of interest in the last years is the Fokker-Planck equation. It describes the evolution of a density according to a drift term <span class="math display">\[\begin{equation}
     \partial_t \rho_t(x) = \nabla \cdot \left( \nabla V \rho_t(x)\right) + \nabla \nabla \rho_t(x).
-\end{equation}\]</span> This has an associated particle method, a stochastic one, because we have the diffusion present <span class="math display">\[\begin{equation}
-    dX_t = -V(X_t)dt + \sqrt{2} dW_t
+\end{equation}\]</span> This equation has an associated particle method, a stochastic one, because we have the diffusion term present <span class="math display">\[\begin{equation}
+    dX_t = -V(X_t)dt + \sqrt{2} dW_t.
 \end{equation}\]</span> The empirical measure represented in terms of particles will converge almost surely to the solution of the PDE.</p>
-<p>This PDE has a corresponding particle discretisation. Each particle evolves according to this Ordinary differential equation.</p>
+<p>However, this PDE has a corresponding particle discretisation, where each particle evolves according to an Ordinary differential equation</p>
+<p>[ prof flow ode ]</p>
 <p>Since the density interacts with itself, the particles interact with each other through the second term.</p>
-<p>This equation has a Wasserstein gradient flow structure. It is the gradient flow of this energy <span class="math display">\[\begin{equation}
+<p>This equation has a Wasserstein gradient flow structure. It is the gradient flow of the following energy <span class="math display">\[\begin{equation}
     \mathcal{E}(\rho) = \int V(x) \rho(x) dx + \int \rho(x) \log \rho(x) dx
-\end{equation}\]</span> it has an external potential term, and the second term is the negative entropy. The particles are going at a direction negative of the gradient of the energy landscape for conservative systems, where the potential is small, to make the energy smaller. The diffusion term forces the density to spread out, so this term makes the entropy smaller.</p>
+\end{equation}\]</span> it has an external potential term, and the second term is the negative entropy. The particles are going at a direction negative of the gradient of the energy landscape for conservative systems, where the potential is small, to make the energy smaller. The diffusion term forces the density to spread out, so this term makes the entropy bigger.</p>
 <p>Fokker-Planck equation can be viewed as a gradient flow. The central point of this idea is to define a manifold on which the Fokker-Planck system is a dynamical system on the manifold and evolving according to its gradient.</p>
-<p>By understanding convexity properties of the function V that represents the potential can inform us about convexity properties of the energy landscape, and from there we can recover properties of the Fokker-Planck equation, i.e.&nbsp;contraction of solutions, exponential convergence to the equilibrium, etc.</p>
-<p>The particle solution is not an Wasserstein gradient flow of this energy. The reason for this is that I could write the PDE as a continuity type of equation <span class="math display">\[\begin{equation}
+<p>By understanding the convexity properties of the function <span class="math inline">\(V(x)\)</span> that represents the potential, can inform us about convexity properties of the energy landscape, and from there we can recover properties of the Fokker-Planck equation, i.e.&nbsp;contraction of solutions, exponential convergence to the equilibrium, etc.</p>
+<p>The particle solution is not a Wasserstein gradient flow of this energy. The reason for this is that I could write the PDE as a continuity type of equation <span class="math display">\[\begin{equation}
     \partial_t \rho_t(x) = \nabla \cdot \left[ \underbrace{( \nabla V + \frac{\nabla \rho}{\rho})}_{\text{velocity field:} v(x,t)} \rho \right]
 \end{equation}\]</span> But this is a weird velocity field and for a general density the particle method will not be well defined. Due to the diffusion the instantaneous Dirac masses will not remain Dirac masses.</p>
 <p>The Wasserstein space is the space of probability measures on <span class="math inline">\(\mathcal{R}^N\)</span> with the metric induced by the Wasserstein distance.</p>
@@ -229,10 +240,11 @@ window.Quarto = {
 <p>The Fokker-Planck equation can be viewed as as the gradient flow in the Wasserstein metric of the relative entropy functional <span class="math display">\[\begin{equation}
     S(\rho) = \int_{\mathcal{R}^d} \rho(x) \log\left( \frac{\rho(x)}{e^{-V(x)}} \right)dx.
 \end{equation}\]</span></p>
-<p>Major computational challenge of the jko scheme is how to computationally efficiently compute the optimal trnasport cost.</p>
-<p>The optimal transport yields geodesics in the Wasserstein space [cite Villani old and new]. The evolution of the probability density described by the Fokker–Planck equation amounts to the a curve in the Wasserstein space, the actual length of this curve is identified as the distance between the initial and the terminal points if this curve is a geodesic. All other curves the connect the two measures have larger dissipation. Optimal transport protocols correspond to geodesics in the Wasserstein space and can be employed in an equivalent definition of curvature.</p>
+<p>However, a major computational challenge of this known as JKO scheme is how to computationally efficiently compute the optimal transport cost.</p>
+<p>The optimal transport yields geodesics in the Wasserstein space [cite Villani old and new]. The evolution of the probability density described by the Fokker–Planck equation amounts to the a curve in the Wasserstein space, the actual length of this curve is identified as the distance between the initial and the terminal points if this curve is a geodesic. All other curves that connect the two measures have larger dissipation. Optimal transport protocols correspond to geodesics in the Wasserstein space and can be employed in an equivalent definition of curvature.</p>
 
 
+</section>
 
 </main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">
