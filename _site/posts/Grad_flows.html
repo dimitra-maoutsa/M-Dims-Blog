@@ -6,8 +6,11 @@
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
+<meta name="author" content="Dimitra Maoutsa">
+<meta name="dcterms.date" content="2022-04-04">
+<meta name="description" content="Understanding the JKO scheme (adapted text from my PhD thesis)">
 
-<title>About – M Dims blog</title>
+<title>Wasserstein gradient flows – M Dims blog</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -23,22 +26,23 @@ ul.task-list li input[type="checkbox"] {
 </style>
 
 
-<script src="site_libs/quarto-nav/quarto-nav.js"></script>
-<script src="site_libs/quarto-nav/headroom.min.js"></script>
-<script src="site_libs/clipboard/clipboard.min.js"></script>
-<script src="site_libs/quarto-search/autocomplete.umd.js"></script>
-<script src="site_libs/quarto-search/fuse.min.js"></script>
-<script src="site_libs/quarto-search/quarto-search.js"></script>
-<meta name="quarto:offset" content="./">
-<script src="site_libs/quarto-html/quarto.js" type="module"></script>
-<script src="site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
-<script src="site_libs/quarto-html/popper.min.js"></script>
-<script src="site_libs/quarto-html/tippy.umd.min.js"></script>
-<link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="site_libs/quarto-html/quarto-syntax-highlighting-0815c480559380816a4d1ea211a47e91.css" rel="stylesheet" id="quarto-text-highlighting-styles">
-<script src="site_libs/bootstrap/bootstrap.min.js"></script>
-<link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="site_libs/bootstrap/bootstrap-c1fac2584b48ed01fb6e278e36375074.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<script src="../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../">
+<script src="../site_libs/quarto-html/quarto.js" type="module"></script>
+<script src="../site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="../site_libs/quarto-html/popper.min.js"></script>
+<script src="../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../site_libs/quarto-html/quarto-syntax-highlighting-0815c480559380816a4d1ea211a47e91.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../site_libs/bootstrap/bootstrap-c1fac2584b48ed01fb6e278e36375074.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
 <script id="quarto-search-options" type="application/json">{
   "location": "navbar",
   "copy-button": false,
@@ -67,18 +71,47 @@ ul.task-list li input[type="checkbox"] {
   }
 }</script>
 
+  <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
 
-<link rel="stylesheet" href="styles.css">
+<script type="text/javascript">
+const typesetMath = (el) => {
+  if (window.MathJax) {
+    // MathJax Typeset
+    window.MathJax.typeset([el]);
+  } else if (window.katex) {
+    // KaTeX Render
+    var mathElements = el.getElementsByClassName("math");
+    var macros = [];
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN") {
+        window.katex.render(texText.data, mathElements[i], {
+          displayMode: mathElements[i].classList.contains('display'),
+          throwOnError: false,
+          macros: macros,
+          fleqn: false
+        });
+      }
+    }
+  }
+}
+window.Quarto = {
+  typesetMath
+};
+</script>
+
+<link rel="stylesheet" href="../styles.css">
 </head>
 
 <body class="nav-fixed fullcontent quarto-light">
 
 <div id="quarto-search-results"></div>
-  <header id="quarto-header" class="headroom fixed-top">
+  <header id="quarto-header" class="headroom fixed-top quarto-banner">
     <nav class="navbar navbar-expand-lg " data-bs-theme="dark">
       <div class="navbar-container container-fluid">
       <div class="navbar-brand-container mx-auto">
-    <a class="navbar-brand" href="./index.html">
+    <a class="navbar-brand" href="../index.html">
     <span class="navbar-title">M Dims blog</span>
     </a>
   </div>
@@ -89,7 +122,7 @@ ul.task-list li input[type="checkbox"] {
           <div class="collapse navbar-collapse" id="navbarCollapse">
             <ul class="navbar-nav navbar-nav-scroll ms-auto">
   <li class="nav-item">
-    <a class="nav-link active" href="./about.html" aria-current="page"> 
+    <a class="nav-link" href="../about.html"> 
 <span class="menu-text">About</span></a>
   </li>  
   <li class="nav-item compact">
@@ -110,48 +143,86 @@ ul.task-list li input[type="checkbox"] {
     </nav>
 </header>
 <!-- content -->
-<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
+<header id="title-block-header" class="quarto-title-block default page-columns page-full">
+  <div class="quarto-title-banner page-columns page-full">
+    <div class="quarto-title column-body">
+      <h1 class="title">Wasserstein gradient flows</h1>
+                  <div>
+        <div class="description">
+          Understanding the JKO scheme (adapted text from my PhD thesis)
+        </div>
+      </div>
+                          <div class="quarto-categories">
+                <div class="quarto-category">blog</div>
+              </div>
+                  </div>
+  </div>
+    
+  
+  <div class="quarto-title-meta">
+
+      <div>
+      <div class="quarto-title-meta-heading">Author</div>
+      <div class="quarto-title-meta-contents">
+               <p>Dimitra Maoutsa </p>
+            </div>
+    </div>
+      
+      <div>
+      <div class="quarto-title-meta-heading">Published</div>
+      <div class="quarto-title-meta-contents">
+        <p class="date">April 4, 2022</p>
+      </div>
+    </div>
+    
+      
+    </div>
+    
+  
+  </header><div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
 <!-- sidebar -->
 <!-- margin-sidebar -->
     
 <!-- main -->
-<div class="quarto-about-jolla">
-  <img src="profile.jpg" class="about-image
-  round " style="height: 15em; width: 15em;">
- <header id="title-block-header" class="quarto-title-block default">
-<div class="quarto-title">
-<h1 class="title">About</h1>
-</div>
-<div class="quarto-title-meta">
-  </div>
-</header><main class="content" id="quarto-document-content">
-<p><strong>This is a semi-organised collection of living texts on theoretical and computational neuroscience, nonlinear dynamics, probability theory, and machine learning theory, or whatever else manages to trigger my interest. </strong></p>
-<p>Some early entries are adapted relics of my PhD thesis (including those bits that didn’t survive the final edits), while others are working notes that help me understand things better and might one day become something more formal.</p>
-<p>New posts will appear irregularly (when I feel like it). Old ones will get updated when I gain new insights, realise I was wrong, or I am bored and feel like procrastinating by refining them.</p>
-<p>Expect mostly math, neurons, and the occasional rabbit hole commentary.</p>
-<p>This blog is maintained by <strong><a href="https://dimitra-maoutsa.github.io/">Dimitra Maoutsa</a></strong>, and is powered by <strong><a href="https://quarto.org/">quarto</a></strong>. Some thumbnails have been generated by <a href="https://openai.com/index/dall-e/">DALL·E</a>.</p>
+<main class="content quarto-banner-title-block" id="quarto-document-content">
 
 
-</main> 
-  <hr class="about-sep">
-   <div class="about-links">
-  <a href="https://twitter.com/@_dim_ma_" class="about-link" rel="" target="">
-    <i class="bi bi-twitter"></i>
-     <span class="about-link-text">Twitter</span>
-  </a>
-  <a href="https://bsky.app/profile/dimma.bsky.social" class="about-link" rel="" target="">
-    <i class="bi bi-bluesky"></i>
-     <span class="about-link-text">Bluesky</span>
-  </a>
-  <a href="https://github.com/dimitra-maoutsa" class="about-link" rel="" target="">
-    <i class="bi bi-github"></i>
-     <span class="about-link-text">Github</span>
-  </a>
-</div>
-</div>
- <!-- /main -->
+
+
+
+<section id="what-is-a-gradient-flow-in-the-probability-space" class="level2">
+<h2 class="anchored" data-anchor-id="what-is-a-gradient-flow-in-the-probability-space">What is a gradient flow in the probability space?</h2>
+<p>Given some energy function <span class="math inline">\(\mathcal{E}(\rho)\)</span> in some probability space <span class="math inline">\(\mathcal{P}(\Omega)\)</span> with some metric <span class="math inline">\(\mathcal{G}(\rho))\)</span>, <span class="math inline">\((\mathcal{P}(\Omega), \mathcal{G}(\rho))\)</span>, the gradient flow can be defined as <strong>the inverse metric times the differential of the energy function</strong> <span class="math display">\[\begin{equation}
+    \partial_t \rho_t = -\mathcal{G}(\rho_t)^{-1} \frac{\delta \mathcal{E}(\rho_t)}{\delta \rho_t}.
+\end{equation}\]</span> Here, <span class="math inline">\(\rho_t\)</span> is a distribution at time <span class="math inline">\(t\)</span>.</p>
+<p>Intuitively, this means that the considered system of equations follows the trajectory of steepest descend on the energy functional <span class="math inline">\(\mathcal{E}(\rho)\)</span>. To define the steepest descend we need to define the notion of the gradient. This depends on the selected geometry of the space and is computed according to a selected metric.</p>
+<p>If we consider as energy function the Kullback Leibler divergence <span class="math inline">\(D_{KL}\)</span>, and for information metric the Wasserstein metric <span class="math inline">\(\mathcal{W}\)</span>, the considered gradient flow, known as Wasserstein gradient flow, forms the Fokker-Planck equation. In this case the metric inverse is <span class="math inline">\(\nabla \cdot \rho_t \nabla\)</span>.</p>
+<p><span class="math display">\[\begin{align}
+\partial_t \rho_t &amp;= - \text{grad}^{\mathcal{W}} D_{KL}(\rho_t ||\rho_{ss})\\
+&amp;= \nabla \cdot \left(  \rho_t \nabla \left( f + \log \rho_t +1 \right)  \right)\\
+&amp;= \nabla \cdot \left( \rho_t \nabla f\right) + \nabla \cdot \nabla \rho\\
+&amp;= \nabla \cdot \left( \rho_t \nabla f\right) + \Delta \rho_t.
+\end{align}\]</span></p>
+<p>Here we have considered that the stationary density is given by <span class="math inline">\(\rho_{ss} \propto e^{-f}\)</span>, and that the differential of <span class="math inline">\(\frac{\delta \mathcal{E}(\rho_t)}{\delta \rho_t} = \log \rho + f\)</span>.</p>
+<p>By considering the Benamou-Brenier formulation <span class="citation" data-cites="benamou2000computational">[@benamou2000computational]</span>,<span class="citation" data-cites="ambrosio2003lecture">[@ambrosio2003lecture]</span> of the Fokker-Planck dynamics we can obtain a better understanding how the selected geometry (and metric) of the probability space influences the gradient flow dynamics. According to the Benamou-Brenier formalism the gradient flow dynamics for the Fokker-Planck equation has the following <strong>optimal transport</strong> interpretation: It describes a search over all possible vector fields <span class="math inline">\(v_t\)</span> that will transport probability mass from <span class="math inline">\(\rho_0\)</span> to <span class="math inline">\(\rho_1\)</span>, with the Wasserstein distance capturing the minimum possible cost of this transfer. Given two probability distributions <span class="math inline">\(\rho_0\)</span> and <span class="math inline">\(\rho_1\)</span> we define this distance to be the minimum of the integral of the norm of the vector field <span class="math inline">\(v_t\)</span> <span class="math display">\[\begin{equation}
+d^2_{OT} (\rho_0, \rho_1) = \inf \limits_{\rho_t, v_t} \int_0^1 \| v_t \|^2_{L^2(\rho_t)} dt = \mathcal{W}^2_2 (\rho_0,\rho_1),
+\end{equation}\]</span> under the constraint that the transient probability distribution <span class="math inline">\(\rho_t\)</span> fulfils the continuity equation <span class="math display">\[\begin{equation}
+    \partial_t \rho_t + \nabla \cdot (\rho_t v_t) = 0,
+\end{equation}\]</span> with <span class="math inline">\(\rho_0 = \rho^0\)</span> and <span class="math inline">\(\rho_1 = \rho^1\)</span>. This constraint captures how the probability <span class="math inline">\(\rho_t\)</span> evolves while being pushed along the time dependent vector field <span class="math inline">\(v_t\)</span>. The Wasserstein distance is the minimal energy cost of performing this transformation from <span class="math inline">\(\rho_0\)</span> to <span class="math inline">\(\rho_1\)</span>. This defines a metric on probability measures, and consequently it induces a geometry on the space of probabilities. (Here, <span class="math inline">\(v_t\)</span> is the gradient of the local transport map.)</p>
+
+
+</section>
+
+</main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">
   window.document.addEventListener("DOMContentLoaded", function (event) {
+    const icon = "";
+    const anchorJS = new window.AnchorJS();
+    anchorJS.options = {
+      placement: 'right',
+      icon: icon
+    };
+    anchorJS.add('.anchored');
     const isCodeAnnotation = (el) => {
       for (const clz of el.classList) {
         if (clz.startsWith('code-annotation-')) {                     

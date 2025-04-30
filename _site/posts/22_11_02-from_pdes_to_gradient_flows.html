@@ -6,9 +6,11 @@
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
-<meta name="dcterms.date" content="2021-04-28">
+<meta name="author" content="Dimitra Maoutsa">
+<meta name="dcterms.date" content="2022-11-02">
+<meta name="description" content="Introduction to deterministic particle methods for PDEs. (adapted text from notes of my PhD thesis - will be updated)">
 
-<title>Post With Code – M Dims blog</title>
+<title>From PDEs to gradient flows for deterministic particle dynamics – M Dims blog</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -24,23 +26,23 @@ ul.task-list li input[type="checkbox"] {
 </style>
 
 
-<script src="../../site_libs/quarto-nav/quarto-nav.js"></script>
-<script src="../../site_libs/quarto-nav/headroom.min.js"></script>
-<script src="../../site_libs/clipboard/clipboard.min.js"></script>
-<script src="../../site_libs/quarto-search/autocomplete.umd.js"></script>
-<script src="../../site_libs/quarto-search/fuse.min.js"></script>
-<script src="../../site_libs/quarto-search/quarto-search.js"></script>
-<meta name="quarto:offset" content="../../">
-<script src="../../site_libs/quarto-html/quarto.js" type="module"></script>
-<script src="../../site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
-<script src="../../site_libs/quarto-html/popper.min.js"></script>
-<script src="../../site_libs/quarto-html/tippy.umd.min.js"></script>
-<script src="../../site_libs/quarto-html/anchor.min.js"></script>
-<link href="../../site_libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="../../site_libs/quarto-html/quarto-syntax-highlighting-0815c480559380816a4d1ea211a47e91.css" rel="stylesheet" id="quarto-text-highlighting-styles">
-<script src="../../site_libs/bootstrap/bootstrap.min.js"></script>
-<link href="../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="../../site_libs/bootstrap/bootstrap-c1fac2584b48ed01fb6e278e36375074.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<script src="../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../">
+<script src="../site_libs/quarto-html/quarto.js" type="module"></script>
+<script src="../site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="../site_libs/quarto-html/popper.min.js"></script>
+<script src="../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../site_libs/quarto-html/quarto-syntax-highlighting-0815c480559380816a4d1ea211a47e91.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../site_libs/bootstrap/bootstrap-c1fac2584b48ed01fb6e278e36375074.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
 <script id="quarto-search-options" type="application/json">{
   "location": "navbar",
   "copy-button": false,
@@ -69,18 +71,47 @@ ul.task-list li input[type="checkbox"] {
   }
 }</script>
 
+  <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
 
-<link rel="stylesheet" href="../../styles.css">
+<script type="text/javascript">
+const typesetMath = (el) => {
+  if (window.MathJax) {
+    // MathJax Typeset
+    window.MathJax.typeset([el]);
+  } else if (window.katex) {
+    // KaTeX Render
+    var mathElements = el.getElementsByClassName("math");
+    var macros = [];
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN") {
+        window.katex.render(texText.data, mathElements[i], {
+          displayMode: mathElements[i].classList.contains('display'),
+          throwOnError: false,
+          macros: macros,
+          fleqn: false
+        });
+      }
+    }
+  }
+}
+window.Quarto = {
+  typesetMath
+};
+</script>
+
+<link rel="stylesheet" href="../styles.css">
 </head>
 
-<body class="nav-fixed fullcontent quarto-light">
+<body class="nav-fixed quarto-light">
 
 <div id="quarto-search-results"></div>
   <header id="quarto-header" class="headroom fixed-top quarto-banner">
     <nav class="navbar navbar-expand-lg " data-bs-theme="dark">
       <div class="navbar-container container-fluid">
       <div class="navbar-brand-container mx-auto">
-    <a class="navbar-brand" href="../../index.html">
+    <a class="navbar-brand" href="../index.html">
     <span class="navbar-title">M Dims blog</span>
     </a>
   </div>
@@ -91,7 +122,7 @@ ul.task-list li input[type="checkbox"] {
           <div class="collapse navbar-collapse" id="navbarCollapse">
             <ul class="navbar-nav navbar-nav-scroll ms-auto">
   <li class="nav-item">
-    <a class="nav-link" href="../../about.html"> 
+    <a class="nav-link" href="../about.html"> 
 <span class="menu-text">About</span></a>
   </li>  
   <li class="nav-item compact">
@@ -115,11 +146,15 @@ ul.task-list li input[type="checkbox"] {
 <header id="title-block-header" class="quarto-title-block default page-columns page-full">
   <div class="quarto-title-banner page-columns page-full">
     <div class="quarto-title column-body">
-      <h1 class="title">Post With Code</h1>
-                                <div class="quarto-categories">
-                <div class="quarto-category">news</div>
-                <div class="quarto-category">code</div>
-                <div class="quarto-category">analysis</div>
+      <h1 class="title">From PDEs to gradient flows for deterministic particle dynamics</h1>
+                  <div>
+        <div class="description">
+          Introduction to deterministic particle methods for PDEs. (adapted text from notes of my PhD thesis - will be updated)
+        </div>
+      </div>
+                          <div class="quarto-categories">
+                <div class="quarto-category">blog</div>
+                <div class="quarto-category">jupyter</div>
               </div>
                   </div>
   </div>
@@ -127,11 +162,17 @@ ul.task-list li input[type="checkbox"] {
   
   <div class="quarto-title-meta">
 
+      <div>
+      <div class="quarto-title-meta-heading">Author</div>
+      <div class="quarto-title-meta-contents">
+               <p>Dimitra Maoutsa </p>
+            </div>
+    </div>
       
       <div>
       <div class="quarto-title-meta-heading">Published</div>
       <div class="quarto-title-meta-contents">
-        <p class="date">April 28, 2021</p>
+        <p class="date">November 2, 2022</p>
       </div>
     </div>
     
@@ -142,7 +183,15 @@ ul.task-list li input[type="checkbox"] {
   </header><div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
 <!-- sidebar -->
 <!-- margin-sidebar -->
-    
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">On this page</h2>
+   
+  <ul>
+  <li><a href="#fokker-planck-equations-as-gradient-flows" id="toc-fokker-planck-equations-as-gradient-flows" class="nav-link active" data-scroll-target="#fokker-planck-equations-as-gradient-flows">Fokker Planck equations as gradient flows</a></li>
+  </ul>
+</nav>
+    </div>
 <!-- main -->
 <main class="content quarto-banner-title-block" id="quarto-document-content">
 
@@ -150,9 +199,52 @@ ul.task-list li input[type="checkbox"] {
 
 
 
-<p>This is a post.</p>
+<p>Let us consider PDEs that describe the evolution of a density <span class="math inline">\(\rho_t(x)\)</span> that evolves in time, with <span class="math inline">\(x\in \mathcal{R}^D\)</span>. We want to describe the temporal evolution of the density <span class="math inline">\(\rho_t(x)\)</span>, e.g., a density of particles at location <span class="math inline">\(x\)</span>.</p>
+<p>One fundamental equation for this is the continuity equation, which prescribes how the the density <span class="math inline">\(\rho_t(x)\)</span> evolves in time according to laws of mass conservation. In particular, the continuity equation expresses the conservation of mass by expressing that the time derivative of the density <span class="math inline">\(\rho_t(x)\)</span> plus the divergence of the product of a velocity field <span class="math inline">\(v(x,t)\)</span> and the density must vanish <span class="math display">\[\begin{equation}
+    \partial_t \rho_t(x) + \nabla \cdot \left(  v(x,t) \rho_t(x) \right) = 0,
+\end{equation}\]</span> given some initial condition <span class="math inline">\(\rho_0(x) = \rho^0(x)\)</span>. The velocity field in this equation prescribes a spatial transformation of the density as time evolves, i.e., how a density of particles starting from <span class="math inline">\(\rho^0(x)\)</span> moves according to the velocity field <span class="math inline">\(v(x,t)\)</span>.</p>
+<p>The continuity equation admits a useful discretisation in terms of particles. We can define an associated ordinary differential equation for their evolving positions. In fact, we can consider the evolution of <span class="math inline">\(N\)</span> particles in the Euclidean space, evolving according to the ODE <span class="math display">\[\begin{equation}
+    \frac{dX_i(t)}{dt} = v(X_i(t),t) ,
+\end{equation}\]</span> given some initial conditions <span class="math inline">\(X_i(0)\)</span>.</p>
+<p>There is a close correspondence between this system of ODEs (the particles) and the solutions of the PDE. In particular, if the velocity field is sufficiently nice (globally Lipschitz in space), then as long as the iniital conditions of the particles are drawn from the density representing the initial condition of the PDE, i.e.&nbsp;if we take the empirical measure at each of the particle locations, i.e., <span class="math display">\[\begin{equation}
+    \hat{\rho}_0 = \frac{1}{N} \sum^N_{i=1} \delta(x-X_i(0)) \xrightarrow{N \rightarrow \infty} \rho_0(x),
+\end{equation}\]</span> then the evolving locations of the Dirac masses (particles) converges according to the Wasserstein metric to the continuum solution of the PDE, <span class="math display">\[\begin{equation}
+    \hat{\rho}_t = \frac{1}{N} \sum^N_{i=1} \delta(x-X_i(t)) \xrightarrow{N \rightarrow \infty} \rho_t(x).
+\end{equation}\]</span></p>
+<p>Because of this close connection between the PDEs and the particle representation, a lot of PDEs have a natural discretisation in terms of particles. The PDE conserves mass, i.e.&nbsp;whatever the integral of the initial condition is, that integral will be preserved over time. And the particle representation preserves positivity.</p>
+<p>In general this equation is a Wasserstein gradient flow for an arbitrary velocity field.</p>
+<p>The difference between the transient empirical solution <span class="math inline">\(\hat{\rho}_t\)</span> and the exact solution <span class="math inline">\(\rho_t\)</span> within the time interval <span class="math inline">\(t \in[0,T]\)</span> will be bounded by a constant weighted by the initial distance of the initial condition</p>
+<p><span class="math display">\[\begin{equation}
+    \mathcal{W}_2(\hat{\rho}_t,\rho_t) \leq C_{T,\|  \nabla v\|_{\infty}} \mathcal{W}_2(\hat{\rho}_0, \rho_0).
+\end{equation}\]</span></p>
+<section id="fokker-planck-equations-as-gradient-flows" class="level2">
+<h2 class="anchored" data-anchor-id="fokker-planck-equations-as-gradient-flows">Fokker Planck equations as gradient flows</h2>
+<p>An equation that is a Wasserstein gradient flow and has attracted a lot of interest in the last years is the Fokker-Planck equation. It describes the evolution of a density according to a drift term <span class="math display">\[\begin{equation}
+    \partial_t \rho_t(x) = \nabla \cdot \left( \nabla V \rho_t(x)\right) + \nabla \nabla \rho_t(x).
+\end{equation}\]</span> This equation has an associated particle method, a stochastic one, because we have the diffusion term present <span class="math display">\[\begin{equation}
+    dX_t = -V(X_t)dt + \sqrt{2} dW_t.
+\end{equation}\]</span> The empirical measure represented in terms of particles will converge almost surely to the solution of the PDE.</p>
+<p>However, this PDE has a corresponding particle discretisation, where each particle evolves according to an Ordinary differential equation</p>
+<p>[ prof flow ode ]</p>
+<p>Since the density interacts with itself, the particles interact with each other through the second term.</p>
+<p>This equation has a Wasserstein gradient flow structure. It is the gradient flow of the following energy <span class="math display">\[\begin{equation}
+    \mathcal{E}(\rho) = \int V(x) \rho(x) dx + \int \rho(x) \log \rho(x) dx
+\end{equation}\]</span> it has an external potential term, and the second term is the negative entropy. The particles are going at a direction negative of the gradient of the energy landscape for conservative systems, where the potential is small, to make the energy smaller. The diffusion term forces the density to spread out, so this term makes the entropy bigger.</p>
+<p>Fokker-Planck equation can be viewed as a gradient flow. The central point of this idea is to define a manifold on which the Fokker-Planck system is a dynamical system on the manifold and evolving according to its gradient.</p>
+<p>By understanding the convexity properties of the function <span class="math inline">\(V(x)\)</span> that represents the potential, can inform us about convexity properties of the energy landscape, and from there we can recover properties of the Fokker-Planck equation, i.e.&nbsp;contraction of solutions, exponential convergence to the equilibrium, etc.</p>
+<p>The particle solution is not a Wasserstein gradient flow of this energy. The reason for this is that I could write the PDE as a continuity type of equation <span class="math display">\[\begin{equation}
+    \partial_t \rho_t(x) = \nabla \cdot \left[ \underbrace{( \nabla V + \frac{\nabla \rho}{\rho})}_{\text{velocity field:} v(x,t)} \rho \right]
+\end{equation}\]</span> But this is a weird velocity field and for a general density the particle method will not be well defined. Due to the diffusion the instantaneous Dirac masses will not remain Dirac masses.</p>
+<p>The Wasserstein space is the space of probability measures on <span class="math inline">\(\mathcal{R}^N\)</span> with the metric induced by the Wasserstein distance.</p>
+<p>The seminal work of Jordan-Kinderlehrer-Otto~ established the view of the Fokker–Planck equation as a gradient flow of the Kullback Leibler divergence functional on a probability space equipped with a Wasserstein metric. The solution of the Fokker–Planck equation with drift forces arising as a gradient of a potential <span class="math inline">\(V(x)\)</span>, i.e., <span class="math inline">\(f(x)=\nabla V(x)\)</span> was identified as the gradient flow of the free energy with respect to the Wasserstein metric. For a gradient system, the free energy difference between two states <span class="math inline">\(\delta F\)</span> amounts to the negative entropy production times the temperature <span class="math inline">\(\delta F = - \mathcal{T} \mathcal{S}\)</span>, where <span class="math inline">\(\mathcal{S}\)</span> stands for the entropy production. Thus this formulation may be viewed as a maximum entropy principle for the Fokker Planck.</p>
+<p>The Fokker-Planck equation can be viewed as as the gradient flow in the Wasserstein metric of the relative entropy functional <span class="math display">\[\begin{equation}
+    S(\rho) = \int_{\mathcal{R}^d} \rho(x) \log\left( \frac{\rho(x)}{e^{-V(x)}} \right)dx.
+\end{equation}\]</span></p>
+<p>However, a major computational challenge of this known as JKO scheme is how to computationally efficiently compute the optimal transport cost.</p>
+<p>The optimal transport yields geodesics in the Wasserstein space [cite Villani old and new]. The evolution of the probability density described by the Fokker–Planck equation amounts to the a curve in the Wasserstein space, the actual length of this curve is identified as the distance between the initial and the terminal points if this curve is a geodesic. All other curves that connect the two measures have larger dissipation. Optimal transport protocols correspond to geodesics in the Wasserstein space and can be employed in an equivalent definition of curvature.</p>
 
 
+</section>
 
 </main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">
