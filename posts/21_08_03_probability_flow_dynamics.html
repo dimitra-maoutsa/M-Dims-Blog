@@ -249,9 +249,9 @@ window.Quarto = {
 <p>To simplify matters, we linearise the Hamilton–Jacobi–Bellman equation by employing a logarithmic variable transformation, <span class="math inline">\(J(x,t) = - \log( \phi(x,t))\)</span>, proposed initially by Nelson in <span class="citation" data-cites="nelson2020dynamical">(<a href="#ref-nelson2020dynamical" role="doc-biblioref">Nelson 1967</a>)</span>, and introduced in the context of stochastic control by Fleming in <span class="citation" data-cites="fleming1977exit">(<a href="#ref-fleming1977exit" role="doc-biblioref">Fleming 1977</a>)</span> (<em>Hopf-Cole transform</em>). This requires the minimal assumption of the control costs <span class="math inline">\(H\)</span> and noise covariance <span class="math inline">\(D\)</span> being inversely proportional along each state dimension, <span class="math inline">\(H \propto D^{-1}=\sigma^{-2}\)</span>, known in the literature as the <em>path integral control condition</em> <span class="citation" data-cites="kappen2005linear">(<a href="#ref-kappen2005linear" role="doc-biblioref">Kappen 2005</a>)</span>.</p>
 <p>The logarithmic variable transformation allows us to express the resulting controlled drift</p>
 <p><span class="math display">\[g(x,t)  = f(x,t) +  \sigma^2 \nabla \ln \phi(x,t), \]</span></p>
-<p>in terms of the solution $_t(x) (x,t) $ of a <em>linear</em> backward partial differential equation</p>
+<p>in terms of the solution <span class="math inline">\(\phi_t(x) \doteq\phi(x,t)\)</span> of a <em>linear</em> backward partial differential equation</p>
 <p><span class="math display">\[\frac{\partial \phi_t(x)}{\partial t} + {\cal{L}}_f \phi_t(x) - U(x,t) \phi_t(x) = 0 ,\]</span></p>
-<p>with terminal condition $_T(x) = (X_T) $, and with <span class="math inline">\(\mathcal{L}_f\)</span> denoting the adjoint Fokker–Planck operator.</p>
+<p>with terminal condition <span class="math inline">\(\phi_T(x) = \chi(X_T)\)</span>, and with <span class="math inline">\(\mathcal{L}_f\)</span> denoting theadjoint Fokker–Planck operator.</p>
 <p><img src="images/OU_1d_bridges.png" class="img-fluid"></p>
 
 
