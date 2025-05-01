@@ -1,1 +1,18 @@
 /* css styles */
+
+/* unvisited link */
+a {
+  color: #911a34; /* maroon */
+  text-decoration: underline; /* optional */
+}
+
+/* visited link */
+a:visited {
+  color: #7f7a88; /* purple-grey */
+}
+
+/* hover effect */
+a:hover {
+  color: #911a61; /* fuchsia */
+  text-decoration: underline;
+}
