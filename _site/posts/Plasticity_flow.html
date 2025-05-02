@@ -6,8 +6,11 @@
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
+<meta name="author" content="Dimitra Maoutsa">
+<meta name="dcterms.date" content="2025-05-04">
+<meta name="description" content="Accounting for the geometry of plasticity">
 
-<title>M Dims Blog – M Dims blog</title>
+<title>Plasticity flows – M Dims blog</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -20,28 +23,46 @@ ul.task-list li input[type="checkbox"] {
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
 }
-</style>
+/* CSS for citations */
+div.csl-bib-body { }
+div.csl-entry {
+  clear: both;
+  margin-bottom: 0em;
+}
+.hanging-indent div.csl-entry {
+  margin-left:2em;
+  text-indent:-2em;
+}
+div.csl-left-margin {
+  min-width:2em;
+  float:left;
+}
+div.csl-right-inline {
+  margin-left:2em;
+  padding-left:1em;
+}
+div.csl-indent {
+  margin-left: 2em;
+}</style>
 
 
-<script src="site_libs/quarto-nav/quarto-nav.js"></script>
-<script src="site_libs/quarto-nav/headroom.min.js"></script>
-<script src="site_libs/clipboard/clipboard.min.js"></script>
-<script src="site_libs/quarto-search/autocomplete.umd.js"></script>
-<script src="site_libs/quarto-search/fuse.min.js"></script>
-<script src="site_libs/quarto-search/quarto-search.js"></script>
-<meta name="quarto:offset" content="./">
-<script src="site_libs/quarto-listing/list.min.js"></script>
-<script src="site_libs/quarto-listing/quarto-listing.js"></script>
-<script src="site_libs/quarto-html/quarto.js" type="module"></script>
-<script src="site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
-<script src="site_libs/quarto-html/popper.min.js"></script>
-<script src="site_libs/quarto-html/tippy.umd.min.js"></script>
-<script src="site_libs/quarto-html/anchor.min.js"></script>
-<link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="site_libs/quarto-html/quarto-syntax-highlighting-0815c480559380816a4d1ea211a47e91.css" rel="stylesheet" id="quarto-text-highlighting-styles">
-<script src="site_libs/bootstrap/bootstrap.min.js"></script>
-<link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="site_libs/bootstrap/bootstrap-c1fac2584b48ed01fb6e278e36375074.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<script src="../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../">
+<script src="../site_libs/quarto-html/quarto.js" type="module"></script>
+<script src="../site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="../site_libs/quarto-html/popper.min.js"></script>
+<script src="../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../site_libs/quarto-html/quarto-syntax-highlighting-0815c480559380816a4d1ea211a47e91.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../site_libs/bootstrap/bootstrap-c1fac2584b48ed01fb6e278e36375074.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
 <script id="quarto-search-options" type="application/json">{
   "location": "navbar",
   "copy-button": false,
@@ -69,35 +90,6 @@ ul.task-list li input[type="checkbox"] {
     "search-label": "Search"
   }
 }</script>
-<script>
-
-  window.document.addEventListener("DOMContentLoaded", function (_event) {
-    const listingTargetEl = window.document.querySelector('#listing-listing .list');
-    if (!listingTargetEl) {
-      // No listing discovered, do not attach.
-      return; 
-    }
-
-    const options = {
-      valueNames: ['listing-date','listing-title','listing-author','listing-image','listing-description','listing-categories',{ data: ['index'] },{ data: ['categories'] },{ data: ['listing-date-sort'] },{ data: ['listing-file-modified-sort'] }],
-      
-      searchColumns: ["listing-date","listing-title","listing-author","listing-image","listing-description","listing-categories"],
-    };
-
-    window['quarto-listings'] = window['quarto-listings'] || {};
-    window['quarto-listings']['listing-listing'] = new List('listing-listing', options);
-
-    if (window['quarto-listing-loaded']) {
-      window['quarto-listing-loaded']();
-    }
-  });
-
-  window.addEventListener('hashchange',() => {
-    if (window['quarto-listing-loaded']) {
-      window['quarto-listing-loaded']();
-    }
-  })
-  </script>
 
   <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
   <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
@@ -129,17 +121,17 @@ window.Quarto = {
 };
 </script>
 
-<link rel="stylesheet" href="styles.css">
+<link rel="stylesheet" href="../styles.css">
 </head>
 
-<body class="nav-fixed quarto-light">
+<body class="nav-fixed fullcontent quarto-light">
 
 <div id="quarto-search-results"></div>
   <header id="quarto-header" class="headroom fixed-top quarto-banner">
     <nav class="navbar navbar-expand-lg " data-bs-theme="dark">
       <div class="navbar-container container-fluid">
       <div class="navbar-brand-container mx-auto">
-    <a class="navbar-brand" href="./index.html">
+    <a class="navbar-brand" href="../index.html">
     <span class="navbar-title">M Dims blog</span>
     </a>
   </div>
@@ -150,7 +142,7 @@ window.Quarto = {
           <div class="collapse navbar-collapse" id="navbarCollapse">
             <ul class="navbar-nav navbar-nav-scroll ms-auto">
   <li class="nav-item">
-    <a class="nav-link" href="./about.html"> 
+    <a class="nav-link" href="../about.html"> 
 <span class="menu-text">About</span></a>
   </li>  
   <li class="nav-item compact">
@@ -173,166 +165,90 @@ window.Quarto = {
 <!-- content -->
 <header id="title-block-header" class="quarto-title-block default page-columns page-full">
   <div class="quarto-title-banner page-columns page-full">
-    <div class="quarto-title column-page-left">
-      <h1 class="title">M Dims Blog</h1>
-                      </div>
+    <div class="quarto-title column-body">
+      <h1 class="title">Plasticity flows</h1>
+                  <div>
+        <div class="description">
+          Accounting for the geometry of plasticity
+        </div>
+      </div>
+                          <div class="quarto-categories">
+                <div class="quarto-category">blog</div>
+              </div>
+                  </div>
   </div>
     
   
-  <div class="quarto-title-meta column-page-left">
+  <div class="quarto-title-meta">
 
+      <div>
+      <div class="quarto-title-meta-heading">Author</div>
+      <div class="quarto-title-meta-contents">
+               <p>Dimitra Maoutsa </p>
+            </div>
+    </div>
       
+      <div>
+      <div class="quarto-title-meta-heading">Published</div>
+      <div class="quarto-title-meta-contents">
+        <p class="date">May 4, 2025</p>
+      </div>
+    </div>
     
       
     </div>
     
   
-  </header><div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-full page-navbar">
+  </header><div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
 <!-- sidebar -->
 <!-- margin-sidebar -->
-    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
-        
-    <h5 class="quarto-listing-category-title">Categories</h5><div class="quarto-listing-category category-default"><div class="category" data-category="">All <span class="quarto-category-count">(4)</span></div><div class="category" data-category="YmxvZw==">blog <span class="quarto-category-count">(3)</span></div><div class="category" data-category="anVweXRlcg==">jupyter <span class="quarto-category-count">(2)</span></div><div class="category" data-category="bmV3cw==">news <span class="quarto-category-count">(1)</span></div></div></div>
+    
 <!-- main -->
-<main class="content quarto-banner-title-block column-page-left" id="quarto-document-content">
+<main class="content quarto-banner-title-block" id="quarto-document-content">
 
 
 
 
 
+<section id="what-is-a-gradient-flow-in-the-probability-space" class="level2">
+<h2 class="anchored" data-anchor-id="what-is-a-gradient-flow-in-the-probability-space">What is a gradient flow in the probability space?</h2>
+<p>Given some energy function <span class="math inline">\(\mathcal{E}(\rho)\)</span> in some probability space <span class="math inline">\(\mathcal{P}(\Omega)\)</span> with some metric <span class="math inline">\(\mathcal{G}(\rho))\)</span>, <span class="math inline">\((\mathcal{P}(\Omega), \mathcal{G}(\rho))\)</span>, a <strong>gradient flow</strong> is defined as <strong>the inverse metric times the differential of the energy function</strong> <span class="math display">\[\begin{equation}
+    \partial_t \rho_t = -\mathcal{G}(\rho_t)^{-1} \frac{\delta \mathcal{E}(\rho_t)}{\delta \rho_t}.
+\end{equation}\]</span> Here, <span class="math inline">\(\rho_t\)</span> is a distribution at time <span class="math inline">\(t\)</span>.</p>
+<p>Intuitively, this means that the considered system of equations follows the trajectory of steepest descend on the energy functional <span class="math inline">\(\mathcal{E}(\rho)\)</span>. To define this steepest descend we need to define the notion of the gradient. This depends on the selected geometry of the space and is computed according to the selected metric.</p>
+<p>If we consider as energy function the <strong>Kullback Leibler divergence</strong> <span class="math inline">\(D_{KL}\)</span>, and for information metric the <strong>Wasserstein metric</strong> <span class="math inline">\(\mathcal{W}\)</span>, the considered gradient flow, known as <strong>Wasserstein gradient flow</strong>, forms the <strong>Fokker-Planck equation</strong>.</p>
+<p>In this case the metric inverse is <span class="math inline">\(\nabla \cdot \rho_t \nabla\)</span>, and we can derive the Fokker–Planck equation as follows:</p>
+<p><span class="math display">\[\begin{align}
+\partial_t \rho_t &amp;= - \text{grad}^{\mathcal{W}} D_{KL}(\rho_t ||\rho_{ss})\\
+&amp;= \nabla \cdot \left(  \rho_t \nabla \left( f + \log \rho_t +1 \right)  \right)\\
+&amp;= \nabla \cdot \left( \rho_t \nabla f\right) + \nabla \cdot \nabla \rho_t\\
+&amp;= \nabla \cdot \left( \rho_t \nabla f\right) + \Delta \rho_t.
+\end{align}\]</span></p>
+<p>In the above equation we have considered that the stationary density is given by <span class="math inline">\(\rho_{ss} \propto e^{-f}\)</span>, and that the differential of <span class="math inline">\(\frac{\delta \mathcal{E}(\rho_t)}{\delta \rho_t} = \log \rho + f\)</span>.</p>
+<p>By considering the Benamou-Brenier formulation <span class="citation" data-cites="benamou2000computational">(<a href="#ref-benamou2000computational" role="doc-biblioref">Benamou and Brenier 2000</a>)</span>,<span class="citation" data-cites="ambrosio2003lecture">(<a href="#ref-ambrosio2003lecture" role="doc-biblioref">Ambrosio et al. 2003</a>)</span> of the Fokker-Planck dynamics we can obtain a better understanding on how the selected geometry (and metric) of the probability space influences the gradient flow dynamics. According to the Benamou-Brenier formalism the gradient flow dynamics for the Fokker-Planck equation has the following <strong>optimal transport</strong> interpretation: It describes a search over all possible vector fields <span class="math inline">\(v_t\)</span> that will transport probability mass from <span class="math inline">\(\rho_0\)</span> to <span class="math inline">\(\rho_1\)</span>, with the Wasserstein distance capturing the minimum possible cost of this transfer. Given two probability distributions <span class="math inline">\(\rho_0\)</span> and <span class="math inline">\(\rho_1\)</span>, we define this distance to be the minimum of the integral of the norm of the vector field <span class="math inline">\(v_t\)</span> <span class="math display">\[\begin{equation}
+d^2_{OT} (\rho_0, \rho_1) = \inf \limits_{\rho_t, v_t} \int_0^1 \| v_t \|^2_{L^2(\rho_t)} dt = \mathcal{W}^2_2 (\rho_0,\rho_1),
+\end{equation}\]</span> under the constraint that the transient probability distribution <span class="math inline">\(\rho_t\)</span> fulfils the continuity equation <span class="math display">\[\begin{equation}
+    \partial_t \rho_t + \nabla \cdot (\rho_t v_t) = 0,
+\end{equation}\]</span> with <span class="math inline">\(\rho_0 = \rho^0\)</span> and <span class="math inline">\(\rho_1 = \rho^1\)</span>. This constraint captures how the probability <span class="math inline">\(\rho_t\)</span> evolves while being pushed along the time dependent vector field <span class="math inline">\(v_t\)</span>. The Wasserstein distance is the minimal energy cost of performing this transformation from <span class="math inline">\(\rho_0\)</span> to <span class="math inline">\(\rho_1\)</span>. This defines a metric on probability measures, and consequently it induces a geometry on the space of probabilities. (Here, <span class="math inline">\(v_t\)</span> is the gradient of the local transport map.)</p>
+<p>Pogodin, R., Cornford, J., Ghosh, A., Gidel, G., Lajoie, G., &amp; Richards, B. A. Synaptic Weight Distributions Depend on the Geometry of Plasticity. In The Twelfth International Conference on Learning Representations.</p>
+</section>
+<section id="learning-considering-the-geometry-of-plasticity" class="level2">
+<h2 class="anchored" data-anchor-id="learning-considering-the-geometry-of-plasticity">Learning … considering the Geometry of Plasticity</h2>
+<p>While I was reviving my old blog and moved (few) old posts from my depracated blog to this one, I remebered while re-reading my post on Wasserstein gradient flows…. This text</p>
+<p>this was one of the shifts in my perspective moving from Eucledian geometry to Riemannian, and the importance of the geometry of the space and the associated metric. This incidentally was instrumental for the last part of my PhD. But also reminded me the recent work from Pogodin, Cornford et al that appeared a couple of years ago and got published in the 2024 ICLR conference discussing the importance of considering the <strong>geometry of plasticity</strong> to determine the limiting weight distribution</p>
 
 
 
+</section>
 
-<div class="quarto-listing quarto-listing-container-default" id="listing-listing">
-<div class="list quarto-listing-default">
-<div class="quarto-post image-right" data-index="0" data-categories="YmxvZyUyQ2p1cHl0ZXI=" data-listing-date-sort="1667343600000" data-listing-file-modified-sort="1746027302178" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="6" data-listing-word-count-sort="1061">
-<div class="thumbnail"><a href="./posts/22_11_02-from_pdes_to_gradient_flows.html" class="no-external">
-
-<img loading="lazy" src="./posts/images/PDE_particles.jpg" class="thumbnail-image">
-
-</a></div>
-<div class="body">
-<h3 class="no-anchor listing-title">
-<a href="./posts/22_11_02-from_pdes_to_gradient_flows.html" class="no-external">From PDEs to gradient flows for deterministic particle dynamics</a>
-</h3>
-<div class="listing-categories">
-
-<div class="listing-category" onclick="window.quartoListingCategory('YmxvZw=='); return false;">blog</div>
-
-<div class="listing-category" onclick="window.quartoListingCategory('anVweXRlcg=='); return false;">jupyter</div>
-
+<div id="quarto-appendix" class="default"><section class="quarto-appendix-contents" role="doc-bibliography" id="quarto-bibliography"><h2 class="anchored quarto-appendix-heading">References</h2><div id="refs" class="references csl-bib-body hanging-indent" data-entry-spacing="0" role="list">
+<div id="ref-ambrosio2003lecture" class="csl-entry" role="listitem">
+Ambrosio, Luigi, Klaus Deckelnick, Gerhard Dziuk, Masayasu Mimura, Vsevolod A Solonnikov, Halil Mete Soner, and Luigi Ambrosio. 2003. <em>Lecture Notes on Optimal Transport Problems</em>. Springer.
 </div>
-<div class="delink listing-description"><a href="./posts/22_11_02-from_pdes_to_gradient_flows.html" class="no-external">
-<p>Introduction to deterministic particle methods for PDEs. (adapted text from notes of my PhD thesis - will be updated)</p>
-</a></div>
+<div id="ref-benamou2000computational" class="csl-entry" role="listitem">
+Benamou, Jean-David, and Yann Brenier. 2000. <em>Numerische Mathematik</em> 84 (3): 375–93.
 </div>
-<div class="metadata">
-<a href="./posts/22_11_02-from_pdes_to_gradient_flows.html" class="no-external">
-<div class="listing-date">
-Nov 2, 2022
-</div>
-<div class="listing-author">
-Dimitra Maoutsa
-</div>
-</a>
-</div>
-</div>
-<div class="quarto-post image-right" data-index="1" data-categories="YmxvZw==" data-listing-date-sort="1649023200000" data-listing-file-modified-sort="1746199685839" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="3" data-listing-word-count-sort="433">
-<div class="thumbnail"><a href="./posts/Grad_flows.html" class="no-external">
-
-<img loading="lazy" src="./posts/images/wasser.jpg" class="thumbnail-image">
-
-</a></div>
-<div class="body">
-<h3 class="no-anchor listing-title">
-<a href="./posts/Grad_flows.html" class="no-external">Wasserstein gradient flows</a>
-</h3>
-<div class="listing-categories">
-
-<div class="listing-category" onclick="window.quartoListingCategory('YmxvZw=='); return false;">blog</div>
-
-</div>
-<div class="delink listing-description"><a href="./posts/Grad_flows.html" class="no-external">
-<p>Understanding the JKO scheme (adapted text from my PhD thesis)</p>
-</a></div>
-</div>
-<div class="metadata">
-<a href="./posts/Grad_flows.html" class="no-external">
-<div class="listing-date">
-Apr 4, 2022
-</div>
-<div class="listing-author">
-Dimitra Maoutsa
-</div>
-</a>
-</div>
-</div>
-<div class="quarto-post image-right" data-index="2" data-categories="YmxvZyUyQ2p1cHl0ZXI=" data-listing-date-sort="1627941600000" data-listing-file-modified-sort="1746190455442" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="6" data-listing-word-count-sort="1144">
-<div class="thumbnail"><a href="./posts/21_08_03_probability_flow_dynamics.html" class="no-external">
-
-<img loading="lazy" src="./posts/images/landscape_r.png" class="thumbnail-image">
-
-</a></div>
-<div class="body">
-<h3 class="no-anchor listing-title">
-<a href="./posts/21_08_03_probability_flow_dynamics.html" class="no-external">Probability flow dynamics for constraining stochastic nonlinear systems</a>
-</h3>
-<div class="listing-categories">
-
-<div class="listing-category" onclick="window.quartoListingCategory('YmxvZw=='); return false;">blog</div>
-
-<div class="listing-category" onclick="window.quartoListingCategory('anVweXRlcg=='); return false;">jupyter</div>
-
-</div>
-<div class="delink listing-description"><a href="./posts/21_08_03_probability_flow_dynamics.html" class="no-external">
-<p>Detailed description of Deterministic Particle Flow control of (upcoming paper) on controling stochastic nonlinear systems by deterministacally perturbing their dynamics.</p>
-</a></div>
-</div>
-<div class="metadata">
-<a href="./posts/21_08_03_probability_flow_dynamics.html" class="no-external">
-<div class="listing-date">
-Aug 3, 2021
-</div>
-<div class="listing-author">
-Dimitra Maoutsa
-</div>
-</a>
-</div>
-</div>
-<div class="quarto-post image-right" data-index="3" data-categories="bmV3cw==" data-listing-date-sort="1619301600000" data-listing-file-modified-sort="1745959384480" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="1" data-listing-word-count-sort="32">
-<div class="thumbnail"><a href="./posts/welcome/index.html" class="no-external">
-
-<p class="card-img-top"><img src="posts/welcome/thumbnail.jpg"  class="thumbnail-image card-img"/></p>
-
-</a></div>
-<div class="body">
-<h3 class="no-anchor listing-title">
-<a href="./posts/welcome/index.html" class="no-external">Welcome To My Blog</a>
-</h3>
-<div class="listing-categories">
-
-<div class="listing-category" onclick="window.quartoListingCategory('bmV3cw=='); return false;">news</div>
-
-</div>
-<div class="delink listing-description"><a href="./posts/welcome/index.html" class="no-external">
-This is the first post in a Quarto blog. Welcome!
-</a></div>
-</div>
-<div class="metadata">
-<a href="./posts/welcome/index.html" class="no-external">
-<div class="listing-date">
-Apr 25, 2021
-</div>
-<div class="listing-author">
-Dimitra Maoutsa
-</div>
-</a>
-</div>
-</div>
-</div>
-<div class="listing-no-matching d-none">No matching items</div>
-</div></main> <!-- /main -->
+</div></section></div></main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">
   window.document.addEventListener("DOMContentLoaded", function (event) {
     const icon = "";
