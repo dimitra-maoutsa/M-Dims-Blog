@@ -6,8 +6,11 @@
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
+<meta name="author" content="Dimitra Maoutsa">
+<meta name="dcterms.date" content="2025-05-25">
+<meta name="description" content="or how to track changes in collective dynamics during learning (coming soon)">
 
-<title>M Dims Blog – M Dims blog</title>
+<title>Low tensor rank learning of neural dynamics – M Dims blog</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -20,28 +23,46 @@ ul.task-list li input[type="checkbox"] {
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
 }
-</style>
+/* CSS for citations */
+div.csl-bib-body { }
+div.csl-entry {
+  clear: both;
+  margin-bottom: 0em;
+}
+.hanging-indent div.csl-entry {
+  margin-left:2em;
+  text-indent:-2em;
+}
+div.csl-left-margin {
+  min-width:2em;
+  float:left;
+}
+div.csl-right-inline {
+  margin-left:2em;
+  padding-left:1em;
+}
+div.csl-indent {
+  margin-left: 2em;
+}</style>
 
 
-<script src="site_libs/quarto-nav/quarto-nav.js"></script>
-<script src="site_libs/quarto-nav/headroom.min.js"></script>
-<script src="site_libs/clipboard/clipboard.min.js"></script>
-<script src="site_libs/quarto-search/autocomplete.umd.js"></script>
-<script src="site_libs/quarto-search/fuse.min.js"></script>
-<script src="site_libs/quarto-search/quarto-search.js"></script>
-<meta name="quarto:offset" content="./">
-<script src="site_libs/quarto-listing/list.min.js"></script>
-<script src="site_libs/quarto-listing/quarto-listing.js"></script>
-<script src="site_libs/quarto-html/quarto.js" type="module"></script>
-<script src="site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
-<script src="site_libs/quarto-html/popper.min.js"></script>
-<script src="site_libs/quarto-html/tippy.umd.min.js"></script>
-<script src="site_libs/quarto-html/anchor.min.js"></script>
-<link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="site_libs/quarto-html/quarto-syntax-highlighting-0815c480559380816a4d1ea211a47e91.css" rel="stylesheet" id="quarto-text-highlighting-styles">
-<script src="site_libs/bootstrap/bootstrap.min.js"></script>
-<link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="site_libs/bootstrap/bootstrap-c1fac2584b48ed01fb6e278e36375074.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<script src="../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../">
+<script src="../site_libs/quarto-html/quarto.js" type="module"></script>
+<script src="../site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="../site_libs/quarto-html/popper.min.js"></script>
+<script src="../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../site_libs/quarto-html/quarto-syntax-highlighting-0815c480559380816a4d1ea211a47e91.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../site_libs/bootstrap/bootstrap-c1fac2584b48ed01fb6e278e36375074.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
 <script id="quarto-search-options" type="application/json">{
   "location": "navbar",
   "copy-button": false,
@@ -69,77 +90,19 @@ ul.task-list li input[type="checkbox"] {
     "search-label": "Search"
   }
 }</script>
-<script>
 
-  window.document.addEventListener("DOMContentLoaded", function (_event) {
-    const listingTargetEl = window.document.querySelector('#listing-listing .list');
-    if (!listingTargetEl) {
-      // No listing discovered, do not attach.
-      return; 
-    }
 
-    const options = {
-      valueNames: ['listing-date','listing-title','listing-author','listing-image','listing-description','listing-categories',{ data: ['index'] },{ data: ['categories'] },{ data: ['listing-date-sort'] },{ data: ['listing-file-modified-sort'] }],
-      
-      searchColumns: ["listing-date","listing-title","listing-author","listing-image","listing-description","listing-categories"],
-    };
-
-    window['quarto-listings'] = window['quarto-listings'] || {};
-    window['quarto-listings']['listing-listing'] = new List('listing-listing', options);
-
-    if (window['quarto-listing-loaded']) {
-      window['quarto-listing-loaded']();
-    }
-  });
-
-  window.addEventListener('hashchange',() => {
-    if (window['quarto-listing-loaded']) {
-      window['quarto-listing-loaded']();
-    }
-  })
-  </script>
-
-  <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
-  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
-
-<script type="text/javascript">
-const typesetMath = (el) => {
-  if (window.MathJax) {
-    // MathJax Typeset
-    window.MathJax.typeset([el]);
-  } else if (window.katex) {
-    // KaTeX Render
-    var mathElements = el.getElementsByClassName("math");
-    var macros = [];
-    for (var i = 0; i < mathElements.length; i++) {
-      var texText = mathElements[i].firstChild;
-      if (mathElements[i].tagName == "SPAN") {
-        window.katex.render(texText.data, mathElements[i], {
-          displayMode: mathElements[i].classList.contains('display'),
-          throwOnError: false,
-          macros: macros,
-          fleqn: false
-        });
-      }
-    }
-  }
-}
-window.Quarto = {
-  typesetMath
-};
-</script>
-
-<link rel="stylesheet" href="styles.css">
+<link rel="stylesheet" href="../styles.css">
 </head>
 
-<body class="nav-fixed quarto-light">
+<body class="nav-fixed fullcontent quarto-light">
 
 <div id="quarto-search-results"></div>
   <header id="quarto-header" class="headroom fixed-top quarto-banner">
     <nav class="navbar navbar-expand-lg " data-bs-theme="dark">
       <div class="navbar-container container-fluid">
       <div class="navbar-brand-container mx-auto">
-    <a class="navbar-brand" href="./index.html">
+    <a class="navbar-brand" href="../index.html">
     <span class="navbar-title">M Dims blog</span>
     </a>
   </div>
@@ -150,7 +113,7 @@ window.Quarto = {
           <div class="collapse navbar-collapse" id="navbarCollapse">
             <ul class="navbar-nav navbar-nav-scroll ms-auto">
   <li class="nav-item">
-    <a class="nav-link" href="./about.html"> 
+    <a class="nav-link" href="../about.html"> 
 <span class="menu-text">About</span></a>
   </li>  
   <li class="nav-item compact">
@@ -173,166 +136,74 @@ window.Quarto = {
 <!-- content -->
 <header id="title-block-header" class="quarto-title-block default page-columns page-full">
   <div class="quarto-title-banner page-columns page-full">
-    <div class="quarto-title column-page-left">
-      <h1 class="title">M Dims Blog</h1>
-                      </div>
+    <div class="quarto-title column-body">
+      <h1 class="title">Low tensor rank learning of neural dynamics</h1>
+                  <div>
+        <div class="description">
+          or how to track changes in collective dynamics during learning (coming soon)
+        </div>
+      </div>
+                          <div class="quarto-categories">
+                <div class="quarto-category">blog</div>
+              </div>
+                  </div>
   </div>
     
   
-  <div class="quarto-title-meta column-page-left">
+  <div class="quarto-title-meta">
 
+      <div>
+      <div class="quarto-title-meta-heading">Author</div>
+      <div class="quarto-title-meta-contents">
+               <p>Dimitra Maoutsa </p>
+            </div>
+    </div>
       
+      <div>
+      <div class="quarto-title-meta-heading">Published</div>
+      <div class="quarto-title-meta-contents">
+        <p class="date">May 25, 2025</p>
+      </div>
+    </div>
     
       
     </div>
     
   
-  </header><div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-full page-navbar">
+  </header><div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
 <!-- sidebar -->
 <!-- margin-sidebar -->
-    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
-        
-    <h5 class="quarto-listing-category-title">Categories</h5><div class="quarto-listing-category category-default"><div class="category" data-category="">All <span class="quarto-category-count">(4)</span></div><div class="category" data-category="YmxvZw==">blog <span class="quarto-category-count">(4)</span></div><div class="category" data-category="anVweXRlcg==">jupyter <span class="quarto-category-count">(2)</span></div></div></div>
+    
 <!-- main -->
-<main class="content quarto-banner-title-block column-page-left" id="quarto-document-content">
+<main class="content quarto-banner-title-block" id="quarto-document-content">
 
 
 
 
 
-
-
-
-
-<div class="quarto-listing quarto-listing-container-default" id="listing-listing">
-<div class="list quarto-listing-default">
-<div class="quarto-post image-right" data-index="0" data-categories="YmxvZw==" data-listing-date-sort="1748124000000" data-listing-file-modified-sort="1748227709307" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="1" data-listing-word-count-sort="197">
-<div class="thumbnail"><a href="./posts/Low_rank_tensors.html" class="no-external">
-
-<img loading="lazy" src="./posts/images/low_tensor.png" class="thumbnail-image">
-
-</a></div>
-<div class="body">
-<h3 class="no-anchor listing-title">
-<a href="./posts/Low_rank_tensors.html" class="no-external">Low tensor rank learning of neural dynamics</a>
-</h3>
-<div class="listing-categories">
-
-<div class="listing-category" onclick="window.quartoListingCategory('YmxvZw=='); return false;">blog</div>
-
+<section id="a-bit-of-background" class="level2">
+<h2 class="anchored" data-anchor-id="a-bit-of-background">A bit of background</h2>
+<p>Back in <strong>September 2023</strong>, after the <strong>Bernstein Conference</strong>, I came back from <strong>Alex Cayco-Gajic’s</strong> workshop talk quite inspired. The <strong>low tensor rank framework</strong> she presented (work together with <strong>Arthur Pellegrino</strong> and <strong>Angus Chadwick</strong> <span class="citation" data-cites="pellegrino2023low">(<a href="#ref-pellegrino2023low" role="doc-biblioref">Pellegrino, Cayco Gajic, and Chadwick 2023</a>)</span>) had struck me as one of the more conceptually elegant approaches <strong>to track how neural population dynamics change over learning</strong>. I very enthusiastically shared my excitement in the internal post-Bernstein group meeting, as one does when ideas resonate.</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="images/low_tensor.png" class="img-fluid figure-img" width="600"></p>
+<figcaption>photo from my presentation containing photo of Alex’s presentation :)</figcaption>
+</figure>
 </div>
-<div class="delink listing-description"><a href="./posts/Low_rank_tensors.html" class="no-external">
-<p>or how to track changes in collective dynamics during learning (coming soon)</p>
-</a></div>
-</div>
-<div class="metadata">
-<a href="./posts/Low_rank_tensors.html" class="no-external">
-<div class="listing-date">
-May 25, 2025
-</div>
-<div class="listing-author">
-Dimitra Maoutsa
-</div>
-</a>
-</div>
-</div>
-<div class="quarto-post image-right" data-index="1" data-categories="YmxvZyUyQ2p1cHl0ZXI=" data-listing-date-sort="1667343600000" data-listing-file-modified-sort="1746027302178" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="6" data-listing-word-count-sort="1061">
-<div class="thumbnail"><a href="./posts/22_11_02-from_pdes_to_gradient_flows.html" class="no-external">
+<p>It turned out that sharing my excitement about someone else’s work didn’t land equally well with everyone in the room, but that’s life. The dynamics that followed are perhaps best saved for a more informal conversation.</p>
+<p>A few months later, in December 2023, I noticed the call for the ICLR 2024 blogpost track, and thought this would be a great opportunity to spotlight this work. I began drafting a piece, but for a mix of personal and political reasons (and admittedly, some competing deadlines), I set it aside.</p>
+<p>Since I am still excited about this work, stay tuned here, I will soon revive this post.</p>
+<p>In the meantime, I recommend going straight to the source, <strong>it’s a great read</strong>.</p>
 
-<img loading="lazy" src="./posts/images/PDE_particles.jpg" class="thumbnail-image">
 
-</a></div>
-<div class="body">
-<h3 class="no-anchor listing-title">
-<a href="./posts/22_11_02-from_pdes_to_gradient_flows.html" class="no-external">From PDEs to gradient flows for deterministic particle dynamics</a>
-</h3>
-<div class="listing-categories">
 
-<div class="listing-category" onclick="window.quartoListingCategory('YmxvZw=='); return false;">blog</div>
+</section>
 
-<div class="listing-category" onclick="window.quartoListingCategory('anVweXRlcg=='); return false;">jupyter</div>
-
+<div id="quarto-appendix" class="default"><section class="quarto-appendix-contents" role="doc-bibliography" id="quarto-bibliography"><h2 class="anchored quarto-appendix-heading">References</h2><div id="refs" class="references csl-bib-body hanging-indent" data-entry-spacing="0" role="list">
+<div id="ref-pellegrino2023low" class="csl-entry" role="listitem">
+Pellegrino, Arthur, N Alex Cayco Gajic, and Angus Chadwick. 2023. <span>“<a href="https://arxiv.org/abs/2308.11567">Low Tensor Rank Learning of Neural Dynamics</a>.”</span> <em>Advances in Neural Information Processing Systems</em> 36: 11674–702.
 </div>
-<div class="delink listing-description"><a href="./posts/22_11_02-from_pdes_to_gradient_flows.html" class="no-external">
-<p>Introduction to deterministic particle methods for PDEs. (adapted text from notes of my PhD thesis - will be updated)</p>
-</a></div>
-</div>
-<div class="metadata">
-<a href="./posts/22_11_02-from_pdes_to_gradient_flows.html" class="no-external">
-<div class="listing-date">
-Nov 2, 2022
-</div>
-<div class="listing-author">
-Dimitra Maoutsa
-</div>
-</a>
-</div>
-</div>
-<div class="quarto-post image-right" data-index="2" data-categories="YmxvZw==" data-listing-date-sort="1649023200000" data-listing-file-modified-sort="1746199685839" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="3" data-listing-word-count-sort="433">
-<div class="thumbnail"><a href="./posts/Grad_flows.html" class="no-external">
-
-<img loading="lazy" src="./posts/images/wasser.jpg" class="thumbnail-image">
-
-</a></div>
-<div class="body">
-<h3 class="no-anchor listing-title">
-<a href="./posts/Grad_flows.html" class="no-external">Wasserstein gradient flows</a>
-</h3>
-<div class="listing-categories">
-
-<div class="listing-category" onclick="window.quartoListingCategory('YmxvZw=='); return false;">blog</div>
-
-</div>
-<div class="delink listing-description"><a href="./posts/Grad_flows.html" class="no-external">
-<p>Understanding the JKO scheme (adapted text from my PhD thesis)</p>
-</a></div>
-</div>
-<div class="metadata">
-<a href="./posts/Grad_flows.html" class="no-external">
-<div class="listing-date">
-Apr 4, 2022
-</div>
-<div class="listing-author">
-Dimitra Maoutsa
-</div>
-</a>
-</div>
-</div>
-<div class="quarto-post image-right" data-index="3" data-categories="YmxvZyUyQ2p1cHl0ZXI=" data-listing-date-sort="1627941600000" data-listing-file-modified-sort="1748224966029" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="6" data-listing-word-count-sort="1144">
-<div class="thumbnail"><a href="./posts/21_08_03_probability_flow_dynamics.html" class="no-external">
-
-<img loading="lazy" src="./posts/images/landscape_r.png" class="thumbnail-image">
-
-</a></div>
-<div class="body">
-<h3 class="no-anchor listing-title">
-<a href="./posts/21_08_03_probability_flow_dynamics.html" class="no-external">Probability flow dynamics for constraining stochastic nonlinear systems</a>
-</h3>
-<div class="listing-categories">
-
-<div class="listing-category" onclick="window.quartoListingCategory('YmxvZw=='); return false;">blog</div>
-
-<div class="listing-category" onclick="window.quartoListingCategory('anVweXRlcg=='); return false;">jupyter</div>
-
-</div>
-<div class="delink listing-description"><a href="./posts/21_08_03_probability_flow_dynamics.html" class="no-external">
-<p>Detailed description of Deterministic Particle Flow control of (upcoming paper) on controling stochastic nonlinear systems by deterministacally perturbing their dynamics.</p>
-</a></div>
-</div>
-<div class="metadata">
-<a href="./posts/21_08_03_probability_flow_dynamics.html" class="no-external">
-<div class="listing-date">
-Aug 3, 2021
-</div>
-<div class="listing-author">
-Dimitra Maoutsa
-</div>
-</a>
-</div>
-</div>
-</div>
-<div class="listing-no-matching d-none">No matching items</div>
-</div></main> <!-- /main -->
+</div></section></div></main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">
   window.document.addEventListener("DOMContentLoaded", function (event) {
     const icon = "";

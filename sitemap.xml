@@ -2,11 +2,15 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
     <loc>https://dimitra-maoutsa.github.io/M-Dims-Blog/about.html</loc>
-    <lastmod>2025-04-30T08:34:07.545Z</lastmod>
+    <lastmod>2025-05-26T01:01:23.987Z</lastmod>
   </url>
   <url>
     <loc>https://dimitra-maoutsa.github.io/M-Dims-Blog/posts/22_11_02-from_pdes_to_gradient_flows.html</loc>
     <lastmod>2025-04-30T15:35:02.178Z</lastmod>
+  </url>
+  <url>
+    <loc>https://dimitra-maoutsa.github.io/M-Dims-Blog/posts/Low_rank_tensors.html</loc>
+    <lastmod>2025-05-26T02:48:29.307Z</lastmod>
   </url>
   <url>
     <loc>https://dimitra-maoutsa.github.io/M-Dims-Blog/posts/Grad_flows.html</loc>
@@ -14,10 +18,10 @@
   </url>
   <url>
     <loc>https://dimitra-maoutsa.github.io/M-Dims-Blog/posts/21_08_03_probability_flow_dynamics.html</loc>
-    <lastmod>2025-05-02T12:54:15.442Z</lastmod>
+    <lastmod>2025-05-26T02:02:46.029Z</lastmod>
   </url>
   <url>
     <loc>https://dimitra-maoutsa.github.io/M-Dims-Blog/index.html</loc>
-    <lastmod>2025-04-29T22:10:56.355Z</lastmod>
+    <lastmod>2025-05-26T01:07:58.689Z</lastmod>
   </url>
 </urlset>
