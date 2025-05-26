@@ -1,5 +1,5 @@
 ---
-title: "M Dims Blog - a Blog maintained by Dimitra Maoutsa"
+title: "M Dims Blog"
 listing:
   contents: posts
   sort: "date desc"
