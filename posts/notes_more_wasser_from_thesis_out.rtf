@@ -1,0 +1,48 @@
+{\rtf1\ansi\ansicpg1252\cocoartf2818
+\cocoatextscaling0\cocoaplatform0{\fonttbl\f0\fswiss\fcharset0 Helvetica;}
+{\colortbl;\red255\green255\blue255;}
+{\*\expandedcolortbl;;}
+\paperw11900\paperh16840\margl1440\margr1440\vieww11520\viewh8400\viewkind0
+\pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\pardirnatural\partightenfactor0
+
+\f0\fs24 \cf0 \
+\\textcolor\{blue\}\{Wasserstein gradient flow. the authros of this seminal paepr make an appealing connection between the dynmaics of a gradient flux/steepst descent for minimising the free energy with respect to the Wasserstein metric, and a special class of PDEs called Fokkker-Planck. JKO construct an iterative variational scheme which extends the Eucledian gradient descent and whose solutions converge to the solutions of the Fokker-Planck equation. In~\\cite\{otto2001geometry\} the author extends the method to the porous medioum equation and points out the resemblance between the Wasserstein space and an infinite-dimesional Riemannin manifold. In ~\\cite\{ambrosio2005gradient\} the authors provide a comprehensive development of gradient flows in a general metric space. Gradient flow ofver the space of probability measures \}\
+Both Langevin dynamics, i.e., $dX_t = -\\nabla V(X_t) dt + \\sqrt\{2\}dW_t$, and Stein Variational Gradient descend can be expressed as gradient flows of a loss function. In particular both of them can be expressed as gradient flows of KL divergence but with respect to different geometries (metrics) on the space of probabilities $\\mathcal\{P\}(\\mathcal\{R\}^D)$.\
+What is a gradient flow? We consider an energy functional that depends on the measure $\\rho$ (here KL divergence). To define the gradient flow there should be some notion of taking th e gradient. This notion is determined by the geometry of the underlying space.\
+Otto: the set of probabilites distributions on rd can be thought of as a riemannian manifold, and considered the set of probability distributions to be equipped with the Wasserstein metric and the associated Wasserstein metric tensor. In this Riemannian geometry we can compute gradients. Difference between 2 due to the underlying metric structure on the set of probability distributions. Both consider KL but with different distances on the probability space, Langevin quadratic Wasserstein distance 2. Benamou bernado - the wasserstein distance is given by the least amount of work/kinetic energy transporting one of the measures to the other one measured with the L2 norm. The stein considers the RKHS norm both s.t. continuity equation.\
+let us consider a discretisation of time, with indices $n$ indicating time steps. From time index $n$ to go to time index $n+1$, the density $\\rho_\{n+1\}$ at $n+1$ will be the minimum of the KL divergence between $\\pi$ and $\\rho$, regularised/constrained such that the distance in appropriate "sense" to the previous step is sufficiently small. So the distance constraining that $\\rho_\{n+1\}$ is not far from $\\rho_n$, but is still moving in the right direction.\
+Both Langevin and SVGD dynamics admit the same formulation, but what is different is the distance according to which we regularise. For Langevin is the optimal transport distance, while in the SVGD we have the dKL, which is what we call the Stein Geometry. \
+Both are optimisng the same loss function but on different geometries, i.e., on different search spaces. Thus the direction the optimisation moves are different, resulting in different trajectories.\
+\
+\\paragraph\{langevin dynamics gradient flow approximation\}\
+\\begin\{equation\}\
+    \\rho_\{n+1\} = \\arg \\min \\limits_\{\\rho\} \\left(\\mathcal\{D\}_\{KL\}(\\rho|\\pi) + \\frac\{1\}\{\\epsilon\} d^2_\{OT\}(\\rho, \\rho_n) \\right),\
+\\end\{equation\}\
+for infinitesimal step $\\epsilon$.\
+\
+\\paragraph\{SVGD gradient flow approximation\}\
+\\begin\{equation\}\
+    \\rho_\{n+1\} = \\arg \\min \\limits_\{\\rho\} \\left(\\mathcal\{D\}_\{KL\}(\\rho|\\pi) + \\frac\{1\}\{\\epsilon\} d^2_\{k\}(\\rho, \\rho_n) \\right),\
+\\end\{equation\}\
+for infinitesimal step $\\epsilon$.\
+\
+-------------------------\
+\
+\
+%Wasserstein gradient flow perspective enriches the available tools that we may have either from the pure PDE or pure particle perspectives.\
+\
+\
+\
+\
+\
+\
+\
+\
+\
+ \\textcolor\{blue\}\{"from a computational\
+point of view, implementing the JKO scheme (1.1) directly is expensive since at each iteration it requires the\
+resolution of a convex optimisation problem involving a Wasserstein distance to the previous step. This is a\
+common difficulty in the computation of optimal transport problems. By replacing the usual Wasserstein distance in the JKO scheme (1.1) by its entropy smoothed approximation\
+one obtains a regularised scheme for the Fokker-Planck equation.  reformulation of this smooth\
+optimisation problem as a Kullback-Leibler projection and makes use of Dykstra\'92s algorithm to attain a fast\
+and convergent numerical scheme " from ~\\cite\{adams2021entropic\} \}}
