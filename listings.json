@@ -2,6 +2,7 @@
   {
     "listing": "/index.html",
     "items": [
+      "/posts/The_Brain_Conferences.html",
       "/posts/Low_rank_tensors.html",
       "/posts/Not_in_photo.html",
       "/posts/22_11_02-from_pdes_to_gradient_flows.html",
