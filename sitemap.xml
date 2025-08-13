@@ -10,27 +10,99 @@
   </url>
   <url>
     <loc>https://dimitra-maoutsa.github.io/M-Dims-Blog/posts/NMA_mentoring.html</loc>
-    <lastmod>2025-07-27T17:22:04.053Z</lastmod>
+    <lastmod>2025-08-12T14:07:47.389Z</lastmod>
   </url>
   <url>
-    <loc>https://dimitra-maoutsa.github.io/M-Dims-Blog/posts/21_08_03_probability_flow_dynamics.html</loc>
-    <lastmod>2025-05-26T02:02:46.029Z</lastmod>
+    <loc>https://dimitra-maoutsa.github.io/M-Dims-Blog/posts/Three_factor_rules.html</loc>
+    <lastmod>2025-08-13T18:13:11.713Z</lastmod>
   </url>
   <url>
-    <loc>https://dimitra-maoutsa.github.io/M-Dims-Blog/posts/Flatiron_CCNJunior_Theoretical_Neuro.html</loc>
-    <lastmod>2025-07-26T01:44:19.416Z</lastmod>
-  </url>
-  <url>
-    <loc>https://dimitra-maoutsa.github.io/M-Dims-Blog/posts/Grad_flows.html</loc>
-    <lastmod>2025-06-08T23:43:26.602Z</lastmod>
+    <loc>https://dimitra-maoutsa.github.io/M-Dims-Blog/posts/Satelite_StatPhys29.html</loc>
+    <lastmod>2025-07-07T00:03:08.444Z</lastmod>
   </url>
   <url>
     <loc>https://dimitra-maoutsa.github.io/M-Dims-Blog/posts/Low_rank_tensors.html</loc>
     <lastmod>2025-07-05T13:20:41.779Z</lastmod>
   </url>
   <url>
-    <loc>https://dimitra-maoutsa.github.io/M-Dims-Blog/posts/Satelite_StatPhys29.html</loc>
-    <lastmod>2025-07-07T00:03:08.444Z</lastmod>
+    <loc>https://dimitra-maoutsa.github.io/M-Dims-Blog/wl-mechanics/src/geomstats/notebooks/03_simple_machine_learning_on_tangent_spaces.html</loc>
+    <lastmod>2025-08-03T17:28:04.121Z</lastmod>
+  </url>
+  <url>
+    <loc>https://dimitra-maoutsa.github.io/M-Dims-Blog/wl-mechanics/src/geomstats/notebooks/02_from_vector_spaces_to_manifolds.html</loc>
+    <lastmod>2025-08-03T17:28:04.121Z</lastmod>
+  </url>
+  <url>
+    <loc>https://dimitra-maoutsa.github.io/M-Dims-Blog/wl-mechanics/src/geomstats/notebooks/08_shape_analysis.html</loc>
+    <lastmod>2025-08-03T17:28:04.133Z</lastmod>
+  </url>
+  <url>
+    <loc>https://dimitra-maoutsa.github.io/M-Dims-Blog/wl-mechanics/src/geomstats/notebooks/06_information_geometry.html</loc>
+    <lastmod>2025-08-03T17:28:04.127Z</lastmod>
+  </url>
+  <url>
+    <loc>https://dimitra-maoutsa.github.io/M-Dims-Blog/wl-mechanics/src/geomstats/notebooks/usecase_graph_embedding_and_clustering_in_hyperbolic_space.html</loc>
+    <lastmod>2025-08-03T17:28:04.145Z</lastmod>
+  </url>
+  <url>
+    <loc>https://dimitra-maoutsa.github.io/M-Dims-Blog/wl-mechanics/src/geomstats/notebooks/usecase_optic_nerve_heads_analysis_in_kendall_shape_space.html</loc>
+    <lastmod>2025-08-03T17:28:04.151Z</lastmod>
+  </url>
+  <url>
+    <loc>https://dimitra-maoutsa.github.io/M-Dims-Blog/wl-mechanics/src/geomstats/notebooks/usecase_emg_sign_classification_in_spd_manifold.html</loc>
+    <lastmod>2025-08-03T17:28:04.145Z</lastmod>
+  </url>
+  <url>
+    <loc>https://dimitra-maoutsa.github.io/M-Dims-Blog/wl-mechanics/notebooks/data.html</loc>
+    <lastmod>2025-08-03T17:02:43.575Z</lastmod>
+  </url>
+  <url>
+    <loc>https://dimitra-maoutsa.github.io/M-Dims-Blog/wl-mechanics/notebooks/visualization.html</loc>
+    <lastmod>2025-08-03T17:02:43.576Z</lastmod>
+  </url>
+  <url>
+    <loc>https://dimitra-maoutsa.github.io/M-Dims-Blog/wl-mechanics/notebooks/amot.html</loc>
+    <lastmod>2025-08-03T17:02:43.575Z</lastmod>
+  </url>
+  <url>
+    <loc>https://dimitra-maoutsa.github.io/M-Dims-Blog/wl-mechanics/src/geomstats/LICENSE.html</loc>
+    <lastmod>2025-08-03T17:28:04.030Z</lastmod>
+  </url>
+  <url>
+    <loc>https://dimitra-maoutsa.github.io/M-Dims-Blog/wl-mechanics/src/geomstats/notebooks/05_riemannian_kmeans.html</loc>
+    <lastmod>2025-08-03T17:28:04.126Z</lastmod>
+  </url>
+  <url>
+    <loc>https://dimitra-maoutsa.github.io/M-Dims-Blog/wl-mechanics/src/geomstats/notebooks/usecase_hand_poses_analysis_in_kendall_shape_space.html</loc>
+    <lastmod>2025-08-03T17:28:04.150Z</lastmod>
+  </url>
+  <url>
+    <loc>https://dimitra-maoutsa.github.io/M-Dims-Blog/wl-mechanics/src/geomstats/notebooks/01_data_on_manifolds.html</loc>
+    <lastmod>2025-08-03T17:28:04.118Z</lastmod>
+  </url>
+  <url>
+    <loc>https://dimitra-maoutsa.github.io/M-Dims-Blog/wl-mechanics/src/geomstats/notebooks/04_riemannian_frechet_mean_and_tangent_pca.html</loc>
+    <lastmod>2025-08-03T17:28:04.123Z</lastmod>
+  </url>
+  <url>
+    <loc>https://dimitra-maoutsa.github.io/M-Dims-Blog/wl-mechanics/src/geomstats/notebooks/07_implement_your_own_riemannian_geometry.html</loc>
+    <lastmod>2025-08-03T17:28:04.129Z</lastmod>
+  </url>
+  <url>
+    <loc>https://dimitra-maoutsa.github.io/M-Dims-Blog/wl-mechanics/src/geomstats/notebooks/usecase_visualizations_in_kendall_shape_spaces.html</loc>
+    <lastmod>2025-08-03T17:28:04.161Z</lastmod>
+  </url>
+  <url>
+    <loc>https://dimitra-maoutsa.github.io/M-Dims-Blog/posts/Grad_flows.html</loc>
+    <lastmod>2025-06-08T23:43:26.602Z</lastmod>
+  </url>
+  <url>
+    <loc>https://dimitra-maoutsa.github.io/M-Dims-Blog/posts/Flatiron_CCNJunior_Theoretical_Neuro.html</loc>
+    <lastmod>2025-07-26T01:44:19.416Z</lastmod>
+  </url>
+  <url>
+    <loc>https://dimitra-maoutsa.github.io/M-Dims-Blog/posts/21_08_03_probability_flow_dynamics.html</loc>
+    <lastmod>2025-05-26T02:02:46.029Z</lastmod>
   </url>
   <url>
     <loc>https://dimitra-maoutsa.github.io/M-Dims-Blog/posts/Not_in_photo.html</loc>
