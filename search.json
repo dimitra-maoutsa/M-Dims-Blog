@@ -109,14 +109,7 @@
     "href": "posts/ICLR_two_posters.html",
     "title": "Two posters at ICLR workshops",
     "section": "",
-    "text": "My recent work has been accepted for poster presentation at two ICLR workshops. Since time was tight for me to attend there physically, the presentation happened online.\nOne poster was part of the Geometry-grounded Representation Learning and Generative Modeling workshop (GRaM) and the poster is available here: link 1. The title for this is “Flow curvature explains failed SDE drift estimation under sparse sampling” and is a theoretical justification for employing geometric inductive biases for inference of stochastic systems (this was to convinve the reviewers without geometric intuition through theory that my geometric method is justified).\nThe second one was part of the New Frontiers in Associative Memories workshop (NFAM) and the poster is available here: link 2. The title of this work was “Learning to learn dynamical associations with reward-gated local plasticity”, and is part of my latest work (although this is a slightly old version of the poster due to conflicting obligations (that will become obvious soon)). The poster is similar to the one presented at NeurIPS last December, but it is still informative."
-  },
-  {
-    "objectID": "posts/ICLR_two_posters.html#footnotes",
-    "href": "posts/ICLR_two_posters.html#footnotes",
-    "title": "Two posters at ICLR workshops",
-    "section": "Footnotes",
-    "text": "Footnotes\n\n\n1↩︎\n2↩︎"
+    "text": "My recent work has been accepted for poster presentation at two ICLR workshops. Since time was tight for me to attend there physically, the presentation happened online.\nOne poster was part of the Geometry-grounded Representation Learning and Generative Modeling workshop (GRaM) and the poster is available here: link [^1]. The title for this is “Flow curvature explains failed SDE drift estimation under sparse sampling” and is a theoretical justification for employing geometric inductive biases for inference of stochastic systems (this was to convinve the reviewers without geometric intuition through theory that my geometric method is justified).\nThe second one was part of the New Frontiers in Associative Memories workshop (NFAM) and the poster is available here: link [^2]. The title of this work was “Learning to learn dynamical associations with reward-gated local plasticity”, and is part of my latest work (although this is a slightly old version of the poster due to conflicting obligations (that will become obvious soon)). The poster is similar to the one presented at NeurIPS last December, but it is still informative."
   },
   {
     "objectID": "posts/Bernstein_2025.html",
