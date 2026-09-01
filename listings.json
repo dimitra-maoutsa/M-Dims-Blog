@@ -2,6 +2,7 @@
   {
     "listing": "/index.html",
     "items": [
+      "/posts/ICML_posters.html",
       "/posts/NeuroMONSTER_poster.html",
       "/posts/BrainNets26_talk.html",
       "/posts/ICML26_gold_reviewer.html",
