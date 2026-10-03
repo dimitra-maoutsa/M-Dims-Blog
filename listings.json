@@ -2,6 +2,7 @@
   {
     "listing": "/index.html",
     "items": [
+      "/posts/Bernstein_2026.html",
       "/posts/Neurips_accepted_paper.html",
       "/posts/ICML_posters.html",
       "/posts/NeuroMONSTER_poster.html",
