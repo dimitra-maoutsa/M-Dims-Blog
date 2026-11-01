@@ -79,6 +79,35 @@ gtag('js', new Date());
 gtag('config', 'G-5TD5B2PHN7', { 'anonymize_ip': true});
 </script>
 
+  <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
+
+<script type="text/javascript">
+const typesetMath = (el) => {
+  if (window.MathJax) {
+    // MathJax Typeset
+    window.MathJax.typeset([el]);
+  } else if (window.katex) {
+    // KaTeX Render
+    var mathElements = el.getElementsByClassName("math");
+    var macros = [];
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN") {
+        window.katex.render(texText.data, mathElements[i], {
+          displayMode: mathElements[i].classList.contains('display'),
+          throwOnError: false,
+          macros: macros,
+          fleqn: false
+        });
+      }
+    }
+  }
+}
+window.Quarto = {
+  typesetMath
+};
+</script>
 
 <link rel="stylesheet" href="../styles.css">
 </head>
@@ -184,11 +213,11 @@ gtag('config', 'G-5TD5B2PHN7', { 'anonymize_ip': true});
 <p>And to clarify here, I have absolutely no issue with any of the people appearing here (excluding Matthias) in the screenshots, and I couldn’t be more grateful for the existence of the work of Georgios Arvanitidis and Philipp Hennig at the time when this was instrumental for finishing my PhD.</p>
 <p><strong>Why Matthias is engaging in this sort of impression management, is something only he and my former postdoctoral advisor know!</strong> You can read more here at the bottom about how old their relationship (<a href="https://dimitra-maoutsa.github.io/values/">values</a>)</p>
 <hr>
-<p>Also while my paper was under review, some person who appears to be an undergraduate(!) has been submitting this paper <a href="https://openreview.net/forum?id=aVGg6lRCVi&amp;referrer=%5Bthe%20profile%20of%20Gao%20Jiang%5D(%2Fprofile%3Fid%3D~Gao_Jiang1)">https://openreview.net/forum?id=aVGg6lRCVi&amp;referrer=%5Bthe%20profile%20of%20Gao%20Jiang%5D(%2Fprofile%3Fid%3D~Gao_Jiang1)</a> at least in ICLR and ICML (where I happened to review it), which contained unreasonably exotic terminology, which nevertheless was ussing terms that was making it similar to my submission, and was broadly postulating the reverse approach form my paper. The paper was almost about to be accepted in ICLR (!), which makes absolutely no sense, and fortunatelly I happend to review it at ICML and called out the author about the incoherent writting and bogus contribution, to which they really didn’t have a lot to reply, and stepped back. I still do not beleive that an undergratute student was behind the paper, because although the contribution was non-existent, the terminology and the mathematical background require some courses in stochastic analysis that I doubt an undergraduate would have had the time to take and then write a paper.</p>
-<p>This is part of my final assesment of that paper in ICML, and I still think that might be true</p>
-<p>Overall after reading the paper, and the rebuttals, I feel that novelty is overstated, the terminology was artificially exotic, and the experiments unclear what they were trying to demonstrate. Thus I propose to reject the paper, and even flag it as a potential product of LLMs.</p>
-<p>I even wonder whether the authors deliberately used this exotic/altered terminology to make the submission more similar to papers that had previously been rejected at other venues, in the hope of increasing the chances that both this submission and the targeted papers would be assigned to the same reviewers, or that the authors would have a higher chance of reviewing the targeted papers. Still not sure what to conclude…</p>
-<p>One of their arguments, that (state dependent) diffusion induces an additional geometry in the space, is true, and known fact (and somewhat obvious for everyone with experience on dynamical systems), but they do not explicitly point out that they do refer to state dependent diffusion terms. Sometimes in their equations they use do indicate the diffusion, which would imply that it is a constant, while their argument holds when the diffusion is a vector field, and thus should be denoted with .</p>
+<p>Also while my paper was under review, some person who appears to be an undergraduate(!) has been submitting this paper <a href="https://openreview.net/forum?id=aVGg6lRCVi&amp;referrer=%5Bthe%20profile%20of%20Gao%20Jiang%5D(%2Fprofile%3Fid%3D~Gao_Jiang1)">https://openreview.net/forum?id=aVGg6lRCVi&amp;referrer=%5Bthe%20profile%20of%20Gao%20Jiang%5D(%2Fprofile%3Fid%3D~Gao_Jiang1)</a> at least in ICLR and ICML (where I happened to review it), which contained unreasonably exotic terminology, which nevertheless was using terms that were making it similar to my submission, and was broadly postulating the reverse approach from my paper, although it was really refering to state dependent deiffusion. The paper was almost about to be accepted in ICLR (!), which makes absolutely no sense, and fortunatelly I happend to review it at ICML and called out the author about the incoherent writting and bogus contribution, to which they really didn’t have a lot to reply, and stepped back. I still do not beleive that an undergratute student was behind the paper, because although the contribution was non-existent, the terminology and the mathematical background require some courses in stochastic analysis that I doubt an undergraduate would have had the time to take and then write a paper.</p>
+<p>This is part of my final assesment of that paper in ICML, and I still think the second paragraph might be true:</p>
+<p><em>Overall after reading the paper, and the rebuttals, I feel that novelty is overstated, the terminology was artificially exotic, and the experiments unclear what they were trying to demonstrate. Thus I propose to reject the paper, and even flag it as a potential product of LLMs.</em></p>
+<p><em>I even wonder whether the authors deliberately used this exotic/altered terminology to make the submission more similar to papers that had previously been rejected at other venues, in the hope of increasing the chances that both this submission and the targeted papers would be assigned to the same reviewers, or that the authors would have a higher chance of reviewing the targeted papers. Still not sure what to conclude…</em></p>
+<p><em>One of their arguments, that (state dependent) diffusion induces an additional geometry in the space, is true, and known fact (and somewhat obvious for everyone with experience on dynamical systems), but they do not explicitly point out that they do refer to state dependent diffusion terms. Sometimes in their equations they use <span class="math inline">\(\sigma\)</span> do indicate the diffusion, which would imply that it is a constant, while their argument holds when the diffusion is a vector field, and thus should be denoted with <span class="math inline">\(\sigma(x)\)</span>.</em></p>
 
 
 
